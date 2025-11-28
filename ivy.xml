@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><ivy-module version="2.0">
+	<info module="xercesImpl" organisation="xerces" status="integration"/>
+	
+	<dependencies>
+		<dependency org="xml-resolver" name="xml-resolver" rev="1.2"/>
+		
+	</dependencies>
+	
+</ivy-module>
