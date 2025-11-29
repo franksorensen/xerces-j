@@ -4,8 +4,12 @@ module xercesImpl {
     requires static xml.resolver;
     requires jdk.xml.dom;
     
-    
     exports org.apache.xerces.dom;
+    exports org.apache.xerces.jaxp;
+    exports org.apache.xerces.jaxp.datatype;
+    exports org.apache.xerces.impl.dv;
+    exports org.apache.xerces.impl.dv.util;
+    exports org.apache.xerces.impl.validation;
 
     uses javax.xml.parsers.DocumentBuilderFactory;
     
