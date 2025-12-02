@@ -3,6 +3,7 @@ module xercesImpl {
     requires java.xml;
     requires static xml.resolver;
     requires jdk.xml.dom;
+    requires java.desktop;
     
     exports org.apache.xerces.dom;
     exports org.apache.xerces.jaxp;

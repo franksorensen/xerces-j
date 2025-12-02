@@ -3,7 +3,7 @@
 	
 	<dependencies>
 		<dependency org="xml-resolver" name="xml-resolver" rev="1.2"/>
-		
+		<dependency org="junit" name="junit" rev="4.13.2"/>
 	</dependencies>
 	
 </ivy-module>
