@@ -69,6 +69,13 @@
 		<mkdir dir="${build.home}" />
 		<mkdir dir="${dist.home}" />
 		
+		<copy  todir="${build.home}">
+			<fileset dir="${src.home}">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>				
+		
+		
 	</target>
 
 	<target name="clean" description="Delete old build and dist directories">
