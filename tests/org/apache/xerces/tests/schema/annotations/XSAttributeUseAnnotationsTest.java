@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSAttributeUse;
 import org.apache.xerces.xs.XSComplexTypeDefinition;
@@ -100,17 +102,17 @@ public class XSAttributeUseAnnotationsTest extends TestCase {
         // Attr ref
         XSAttributeUse attr = (XSAttributeUse) attrUses.item(0);
         XSObjectList annotations = attr.getAnnotations();
-        assertEquals("REF", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "REF");
 
         // local attr
         attr = (XSAttributeUse) attrUses.item(1);
         annotations = attr.getAnnotations();
-        assertEquals("LOCAL", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "LOCAL");
 
         // attr grp ref
         attr = (XSAttributeUse) attrUses.item(2);
         annotations = attr.getAnnotations();
-        assertEquals("GROUP", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "GROUP");
     }
 
     /**
@@ -133,17 +135,17 @@ public class XSAttributeUseAnnotationsTest extends TestCase {
         // Attr ref
         XSAttributeUse attr = (XSAttributeUse) attrUses.item(0);
         XSObjectList annotations = attr.getAnnotations();
-        assertEquals("REF", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "REF");
 
         // local attr
         attr = (XSAttributeUse) attrUses.item(1);
         annotations = attr.getAnnotations();
-        assertEquals("LOCAL", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "LOCAL");
 
         // attr grp ref
         attr = (XSAttributeUse) attrUses.item(2);
         annotations = attr.getAnnotations();
-        assertEquals("GROUP", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "GROUP");
     }
 
     /**
@@ -166,17 +168,17 @@ public class XSAttributeUseAnnotationsTest extends TestCase {
         // Attr ref
         XSAttributeUse attr = (XSAttributeUse) attrUses.item(0);
         XSObjectList annotations = attr.getAnnotations();
-        assertEquals("REF", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "REF");
 
         // local attr
         attr = (XSAttributeUse) attrUses.item(1);
         annotations = attr.getAnnotations();
-        assertEquals("LOCAL", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "LOCAL");
 
         // attr grp ref
         attr = (XSAttributeUse) attrUses.item(2);
         annotations = attr.getAnnotations();
-        assertEquals("GROUP", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "GROUP");
 
     }
 
@@ -200,18 +202,18 @@ public class XSAttributeUseAnnotationsTest extends TestCase {
         // Attr ref
         XSAttributeUse attr = (XSAttributeUse) attrUses.item(0);
         XSObjectList annotations = attr.getAnnotations();
-        assertEquals("REF", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "REF");
 
         // local attr
         attr = (XSAttributeUse) attrUses.item(1);
         annotations = attr.getAnnotations();
-        assertEquals("LOCAL", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "LOCAL");
 
         // attr grp ref
         // The attribute in the group has an annotation element
         attr = (XSAttributeUse) attrUses.item(2);
         annotations = attr.getAnnotations();
-        assertEquals("GROUP", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "GROUP");
     }
 
     /**
@@ -234,18 +236,18 @@ public class XSAttributeUseAnnotationsTest extends TestCase {
         // Attr ref
         XSAttributeUse attr = (XSAttributeUse) attrUses.item(0);
         XSObjectList annotations = attr.getAnnotations();
-        assertEquals("REF", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "REF");
 
         // local attr
         attr = (XSAttributeUse) attrUses.item(1);
         annotations = attr.getAnnotations();
-        assertEquals("LOCAL", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "LOCAL");
 
         // attr grp ref
         // The attribute in the group has an annotation element
         attr = (XSAttributeUse) attrUses.item(2);
         annotations = attr.getAnnotations();
-        assertEquals("GROUP", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "GROUP");
     }
 
     /**
@@ -268,58 +270,54 @@ public class XSAttributeUseAnnotationsTest extends TestCase {
         // Attr ref
         XSAttributeUse attr = (XSAttributeUse) attrUses.item(0);
         XSObjectList annotations = attr.getAnnotations();
-        assertEquals("REF", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "REF");
 
         XSAnnotation annotation = attr.getAttrDeclaration().getAnnotation();
         String expected = "<annotation sn:att=\"ATT1\"  id=\"ANNOT1\" xmlns=\"http://www.w3.org/2001/XMLSchema\" xmlns:sv=\"XSAttributeUseAnnotationsTest\" xmlns:sn=\"SyntheticAnnotationNS\" > "
                 + "<appinfo>APPINFO1</appinfo>" + "</annotation>";
-        assertEquals("REF_STRING", trim(expected), trim(annotation
-                .getAnnotationString()));
+        assertEquals(trim(expected), trim(annotation
+                .getAnnotationString()), "REF_STRING");
 
         annotations = attr.getAttrDeclaration().getAnnotations();
         assertEquals(
-                "REF_STRING_ANNOTATIONS",
                 trim(expected),
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+                "REF_STRING_ANNOTATIONS");
 
         // local attr
         attr = (XSAttributeUse) attrUses.item(1);
         annotations = attr.getAnnotations();
-        assertEquals("LOCAL", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "LOCAL");
 
         annotation = attr.getAttrDeclaration().getAnnotation();
         expected = "<annotation sn:att=\"ATT11\"  id=\"ANNOT6\" xmlns=\"http://www.w3.org/2001/XMLSchema\" xmlns:sv=\"XSAttributeUseAnnotationsTest\" xmlns:sn=\"SyntheticAnnotationNS\" > "
                 + "<appinfo>APPINFO6</appinfo>" + "</annotation>";
-        assertEquals("LOCAL_STRING", trim(expected), trim(annotation
-                .getAnnotationString()));
+        assertEquals(trim(expected), trim(annotation
+                .getAnnotationString()), "LOCAL_STRING");
 
         annotations = attr.getAttrDeclaration().getAnnotations();
         assertEquals(
-                "LOCAL_STRING_ANNOTATIONS",
                 trim(expected),
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+                "LOCAL_STRING_ANNOTATIONS");
 
         // attr grp ref
         // The attribute in the group has an annotation element
         attr = (XSAttributeUse) attrUses.item(2);
         annotations = attr.getAnnotations();
-        assertEquals("GROUP", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "GROUP");
 
         annotation = attr.getAttrDeclaration().getAnnotation();
         expected = "<annotation id=\"ANNOT3\" xmlns=\"http://www.w3.org/2001/XMLSchema\" xmlns:sv=\"XSAttributeUseAnnotationsTest\" xmlns:sn=\"SyntheticAnnotationNS\" > "
                 + "<appinfo>APPINFO3</appinfo>" + "</annotation>";
-        assertEquals("GROUP_STRING", trim(expected), trim(annotation
-                .getAnnotationString()));
+        assertEquals(trim(expected), trim(annotation
+                .getAnnotationString()), "GROUP_STRING");
 
         annotations = attr.getAttrDeclaration().getAnnotations();
         assertEquals(
-                "GROUP_STRING_ANNOTATIONS",
                 trim(expected),
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+                "GROUP_STRING_ANNOTATIONS");
 
-    }
-
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(XSAttributeUseAnnotationsTest.class);
     }
 }

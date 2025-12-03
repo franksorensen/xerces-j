@@ -17,8 +17,11 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.apache.xerces.tests.jaxp.JAXP12Tests;
+import org.apache.xerces.tests.jaxp.JAXPSecureProcessingTest;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
+import org.junit.platform.suite.api.SuiteDisplayName;
 
 /**
  * All XSModel Tests
@@ -26,26 +29,19 @@ import junit.framework.TestSuite;
  * @author Neil Delima, IBM
  * @version $Id$
  */
+@Suite
+@SuiteDisplayName("Tests for JAXP")
+@SelectClasses({ XSAttributeGroupAnnotationsTest.class,
+    XSNotationAnnotationsTest.class,
+    XSElementAnnotationsTest.class,
+    XSAttributeUseAnnotationsTest.class,
+    XSAttributeAnnotationsTest.class,
+    XSFacetAnnotationsTest.class,
+    XSModelGroupDefinitionAnnotationsTest.class,
+    XSModelGroupAnnotationsTest.class,
+    XSParticleAnnotationsTest.class,
+    XSWildcardAnnotationsTest.class }) 
 public class AllTests {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AllTests.suite());
-    }
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Test for Schema Annotations");
-        //$JUnit-BEGIN$
-        suite.addTestSuite(XSAttributeGroupAnnotationsTest.class);
-        suite.addTestSuite(XSNotationAnnotationsTest.class);
-        suite.addTestSuite(XSElementAnnotationsTest.class);
-        suite.addTestSuite(XSAttributeUseAnnotationsTest.class);
-        suite.addTestSuite(XSAttributeAnnotationsTest.class);
-        suite.addTestSuite(XSFacetAnnotationsTest.class);
-        suite.addTestSuite(XSModelGroupDefinitionAnnotationsTest.class);
-        suite.addTestSuite(XSModelGroupAnnotationsTest.class);
-        suite.addTestSuite(XSParticleAnnotationsTest.class);
-        suite.addTestSuite(XSWildcardAnnotationsTest.class);
-        //$JUnit-END$
-        return suite;
-    }
 
 }

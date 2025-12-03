@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSAttributeDeclaration;
 import org.apache.xerces.xs.XSImplementation;
@@ -193,7 +195,7 @@ public class XSAttributeAnnotationsTest extends TestCase {
                 "XSAttributeAnnotationsTest");
         XSAnnotation annotation = attr.getAnnotation();
 
-        assertNotNull("Synthetic Annotation Null", annotation);
+        assertNotNull(annotation, "Synthetic Annotation Null");
     }
 
     /**
@@ -212,7 +214,7 @@ public class XSAttributeAnnotationsTest extends TestCase {
                 "XSAttributeAnnotationsTest");
         XSObjectList annotations = attr.getAnnotations();
 
-        assertEquals("Synthetic Annotation Empty", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "Synthetic Annotation Empty");
     }
 
     /**
@@ -231,7 +233,7 @@ public class XSAttributeAnnotationsTest extends TestCase {
                 "XSAttributeAnnotationsTest");
         XSAnnotation annotation = attr.getAnnotation();
 
-        assertNull("Synthetic Annotation Not Null", annotation);
+        assertNull(annotation, "Synthetic Annotation Not Null");
     }
 
     /**
@@ -250,15 +252,9 @@ public class XSAttributeAnnotationsTest extends TestCase {
                 "XSAttributeAnnotationsTest");
         XSObjectList annotations = attr.getAnnotations();
 
-        assertEquals("Synthetic Annotation Empty", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "Synthetic Annotation Empty");
     }
 
-    /**
-     * 
-     * @param args
-     */
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(XSAttributeAnnotationsTest.class);
-    }
+
 
 }

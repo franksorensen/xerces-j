@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.File;
 import java.net.URL;
 
@@ -24,13 +26,15 @@ import java.net.URL;
  * @author Neil Delima, IBM
  * @version $Id$
  */
-public class TestCase extends junit.framework.TestCase {
+public class TestCase {
+
+    protected String name;
 
     public TestCase() {
     }
 
     public TestCase(String test) {
-        super(test);
+        this.name = "";
     }
 
     protected String getResourceURL(String path) {
@@ -65,12 +69,5 @@ public class TestCase extends junit.framework.TestCase {
         return String.copyValueOf(dest,0,j-1);
     }
 
-    /**
-     * 
-     * @param args
-     */
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(TestCase.class);
-    }
 
 }
