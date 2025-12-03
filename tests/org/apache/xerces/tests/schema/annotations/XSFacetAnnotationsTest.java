@@ -19,6 +19,10 @@ package org.apache.xerces.tests.schema.annotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSAttributeDeclaration;
 import org.apache.xerces.xs.XSAttributeUse;
@@ -56,6 +60,7 @@ public class XSFacetAnnotationsTest extends TestCase {
      * This method is called before every test case method, to set up the test
      * fixture.
      */
+    @BeforeEach
     protected void setUp() {
         try {
             // get DOM Implementation using DOM Registry
@@ -84,6 +89,7 @@ public class XSFacetAnnotationsTest extends TestCase {
      * This method is called before every test case method, to tears down the
      * test fixture.
      */
+    @AfterEach
     protected void tearDown() {
         fConfig
                 .setParameter(
@@ -94,6 +100,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #1.
      */
+	@Test
     public void testST1Annotation() {
         st1AnnotationTest(Boolean.FALSE);
         st1AnnotationTest(Boolean.TRUE);
@@ -123,6 +130,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #2.
      */
+	@Test
     public void testST2Annotation() {
         st2AnnotationTest(Boolean.FALSE);
         st2AnnotationTest(Boolean.TRUE);
@@ -176,6 +184,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #3.
      */
+	@Test
     public void testST3Annotation() {
         st3AnnotationTest(Boolean.FALSE);
         st3AnnotationTest(Boolean.TRUE);
@@ -213,6 +222,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #4.
      */
+	@Test
     public void testST4Annotation() {
         st4AnnotationTest(Boolean.FALSE);
         st4AnnotationTest(Boolean.TRUE);
@@ -251,6 +261,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #5.
      */
+	@Test
     public void testST5Annotation() {
         st5AnnotationTest(Boolean.FALSE);
         st5AnnotationTest(Boolean.TRUE);
@@ -289,6 +300,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #6.
      */
+	@Test
     public void testST6Annotation() {
         st6AnnotationTest(Boolean.FALSE);
         st6AnnotationTest(Boolean.TRUE);
@@ -327,6 +339,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #7.
      */
+	@Test
     public void testST7Annotation() {
         st7AnnotationTest(Boolean.FALSE);
         st7AnnotationTest(Boolean.TRUE);
@@ -368,6 +381,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #8.
      */
+	@Test
     public void testST8Annotation() {
         st8AnnotationTest(Boolean.FALSE);
         st8AnnotationTest(Boolean.TRUE);
@@ -409,6 +423,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #9.
      */
+	@Test
     public void testS9Annotation() {
         st9AnnotationTest(Boolean.FALSE);
         st9AnnotationTest(Boolean.TRUE);
@@ -450,6 +465,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #10.
      */
+	@Test
     public void testST10Annotation() {
         st10AnnotationTest(Boolean.FALSE);
         st10AnnotationTest(Boolean.TRUE);
@@ -494,6 +510,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #11.
      */
+	@Test
     public void testST11Annotation() {
         st11AnnotationTest(Boolean.FALSE);
         st11AnnotationTest(Boolean.TRUE);
@@ -532,6 +549,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #12.
      */
+	@Test
     public void testST12Annotation() {
         st12AnnotationTest(Boolean.FALSE);
         st12AnnotationTest(Boolean.TRUE);
@@ -570,6 +588,7 @@ public class XSFacetAnnotationsTest extends TestCase {
     /**
      * Test #13.
      */
+	@Test
     public void testST13Annotation() {
         st13AnnotationTest(Boolean.FALSE);
         st13AnnotationTest(Boolean.TRUE);
@@ -611,6 +630,7 @@ public class XSFacetAnnotationsTest extends TestCase {
      * Test #14. REVISIT: Bug if there's a synthetic annotation on a facet we
      * don't generate it.
      */
+	@Test
     public void testST14Annotation() {
         st14AnnotationTest(Boolean.FALSE);
         st14AnnotationTest(Boolean.TRUE);
@@ -669,6 +689,7 @@ public class XSFacetAnnotationsTest extends TestCase {
      * synthetic annotations REVISIT: Bug if there's a synthetic annotation on a
      * facet we don't generate it.
      */
+	@Test
     public void testST15Annotation() {
         st15AnnotationTest(Boolean.FALSE);
         st15AnnotationTest(Boolean.TRUE);
@@ -714,6 +735,7 @@ public class XSFacetAnnotationsTest extends TestCase {
      * Test #16.
      * 
      */
+	@Test
     public void testST16Annotation() {
         st16AnnotationTest(Boolean.FALSE);
         st16AnnotationTest(Boolean.TRUE);

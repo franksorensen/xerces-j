@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.xs.ItemPSVI;
 
@@ -29,10 +30,6 @@ public class UseGrammarPoolOnly_False_Test extends BaseTest {
     
     private final static String UNKNOWN_TYPE_ERROR = "cvc-type.1";
     private final static String INVALID_DERIVATION_ERROR = "cvc-elt.4.3";
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UseGrammarPoolOnly_False_Test.class);
-    }
     
     protected String getXMLDocument() {
         return "otherNamespace.xml";
@@ -62,12 +59,13 @@ public class UseGrammarPoolOnly_False_Test extends BaseTest {
      * this test simply ensures that the existing functionality did not disappear.
      * -PM
      */
+	@Test
     public void testUsingOnlyGrammarPool() {
         try {
             validateDocument();
         } 
         catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());

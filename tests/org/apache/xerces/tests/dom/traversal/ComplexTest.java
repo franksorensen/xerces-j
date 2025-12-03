@@ -17,6 +17,10 @@
 
 package org.apache.xerces.tests.dom.traversal;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.ElementTraversal;
 
@@ -40,6 +44,7 @@ public class ComplexTest extends AbstractTestCase {
             "<!ENTITY c '&b;'>" +
             "]><root>&c;</root>";
     
+    @Test
     public void testGetFirstChild1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getFirstElementChild();
@@ -49,6 +54,7 @@ public class ComplexTest extends AbstractTestCase {
         assertNull(e);
     }
     
+    @Test
     public void testGetFirstChild2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getFirstElementChild();
@@ -58,6 +64,7 @@ public class ComplexTest extends AbstractTestCase {
         assertNull(e);
     }
     
+    @Test
     public void testGetLastChild1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getLastElementChild();
@@ -67,6 +74,7 @@ public class ComplexTest extends AbstractTestCase {
         assertNull(e);
     }
     
+    @Test
     public void testGetLastChild2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getLastElementChild();
@@ -76,6 +84,7 @@ public class ComplexTest extends AbstractTestCase {
         assertNull(e);
     }
     
+    @Test
     public void testGetNextElementSibling1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getFirstElementChild();
@@ -96,6 +105,7 @@ public class ComplexTest extends AbstractTestCase {
         assertEquals("i", e.getNodeName());
     }
     
+    @Test
     public void testGetNextElementSibling2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getFirstElementChild();
@@ -104,6 +114,7 @@ public class ComplexTest extends AbstractTestCase {
         assertNull(e);
     }
     
+    @Test
     public void testGetPreviousElementSibling1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getLastElementChild();
@@ -124,6 +135,7 @@ public class ComplexTest extends AbstractTestCase {
         assertEquals("i", e.getNodeName());
     }
     
+    @Test
     public void testGetPreviousElementSibling2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getLastElementChild();
@@ -132,11 +144,13 @@ public class ComplexTest extends AbstractTestCase {
         assertNull(e);
     }
     
+    @Test
     public void testChildElementCount1() {
         ElementTraversal et = parse(DOC1);
         assertEquals(11, et.getChildElementCount());
     }
     
+    @Test
     public void testChildElementCount2() {
         ElementTraversal et = parse(DOC2);
         assertEquals(1, et.getChildElementCount());

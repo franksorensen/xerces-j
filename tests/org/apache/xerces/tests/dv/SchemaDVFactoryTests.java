@@ -15,22 +15,27 @@
  * limitations under the License.
  */
 
-package org.apache.xerces.tests.idc;
+package org.apache.xerces.tests.dv;
 
-import org.junit.platform.suite.api.SelectClasses;
-import org.junit.platform.suite.api.Suite;
-import org.junit.platform.suite.api.SuiteDisplayName;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.apache.xerces.impl.dv.SchemaDVFactory;
+import org.apache.xerces.impl.dv.XSSimpleType;
+import org.junit.jupiter.api.Test;
 
 /**
- * XSD IDC constraints tests.
- * 
- * @author <a href="mailto:mukulg@apache.org">Mukul Gandhi</a>
- * @version $Id$
+ * @version $Id: $
  */
-@Suite
-@SuiteDisplayName("Tests for XSD IDC constraints.")
-@SelectClasses({ IDConstraintTests.class }) 
-public class AllTests {
-    
+public class SchemaDVFactoryTests {
 
+    @Test
+    public void testDurationType() {
+        String dataType = "duration";
+        
+        try {
+            XSSimpleType simpleType = SchemaDVFactory.getInstance().getBuiltInType(dataType);
+        } catch (Exception e) {
+            fail("Simple type creation failed: " + e.getMessage());
+        }
+    }
 }

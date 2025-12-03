@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
 import org.apache.xerces.xs.ItemPSVI;
@@ -30,10 +31,6 @@ import org.xml.sax.SAXException;
 public class UnparsedEntityCheckingTest extends BaseTest {
     
     public static final String UNDECLARED_ENTITY = "UndeclaredEntity";
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UnparsedEntityCheckingTest.class);
-    }
     
     protected String getXMLDocument() {
         return "unparsedEntity.xml";
@@ -51,87 +48,93 @@ public class UnparsedEntityCheckingTest extends BaseTest {
         super(name);
     }
     
+	@Test
     public void testDefaultValid() {
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testSetFalseValid() {
         try {
             fValidator.setFeature(UNPARSED_ENTITY_CHECKING, false);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testSetTrueValid() {
         try {
             fValidator.setFeature(UNPARSED_ENTITY_CHECKING, true);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testDefaultInvalid() {
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(null,
                 "unparsedEntityAttr", "invalid");
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkInvalid();
     }
     
+	@Test
     public void testSetFalseInvalid() {
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(null,
                 "unparsedEntityAttr", "invalid");
         try {
             fValidator.setFeature(UNPARSED_ENTITY_CHECKING, false);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testSetTrueInvalid() {
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(null,
                 "unparsedEntityAttr", "invalid");
         try {
             fValidator.setFeature(UNPARSED_ENTITY_CHECKING, true);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkInvalid();

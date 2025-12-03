@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
 import org.apache.xerces.xs.ItemPSVI;
@@ -31,10 +32,6 @@ import org.apache.xerces.xs.ItemPSVI;
  * @version $Id$
  */
 public class FixedAttrTest extends BaseTest {
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(FixedAttrTest.class);
-    }
     
     protected String getXMLDocument() {
         return "fixedAttr.xml";
@@ -56,11 +53,12 @@ public class FixedAttrTest extends BaseTest {
         super.tearDown();
     }
     
+	@Test
     public void testDefault() {
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());

@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.dom.traversal;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.IOException;
 import java.io.StringReader;
 
@@ -24,6 +26,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -31,16 +35,16 @@ import org.w3c.dom.ElementTraversal;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import junit.framework.TestCase;
 
 /**
  * @author Michael Glavassevich, IBM
  * @version $Id$
  */
-public abstract class AbstractTestCase extends TestCase {
+public abstract class AbstractTestCase {
     
     private DocumentBuilder fDocumentBuilder;
     
+    @BeforeEach
     protected final void setUp() {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -54,6 +58,7 @@ public abstract class AbstractTestCase extends TestCase {
         }
     }
     
+    @AfterEach
     protected final void tearDown() {
         fDocumentBuilder = null;
     }
@@ -77,7 +82,7 @@ public abstract class AbstractTestCase extends TestCase {
     }
     
     protected final ElementTraversal toElementTraversal(Element e) {
-        assertTrue("e instanceof ElementTraversal", e == null || e instanceof ElementTraversal);
+        assertTrue(e == null || e instanceof ElementTraversal, "e instanceof ElementTraversal");
         return (ElementTraversal) e;
     }
 }

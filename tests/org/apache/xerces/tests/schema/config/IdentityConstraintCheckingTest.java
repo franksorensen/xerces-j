@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
 import org.apache.xerces.xs.ItemPSVI;
@@ -37,10 +38,6 @@ public class IdentityConstraintCheckingTest extends BaseTest {
     
     public static final String INVALID_KEYREF = "cvc-identity-constraint.4.3";
     
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IdentityConstraintCheckingTest.class);
-    }
-    
     protected String getXMLDocument() {
         return "idc.xml";
     }
@@ -57,41 +54,44 @@ public class IdentityConstraintCheckingTest extends BaseTest {
         super(name);
     }
     
+	@Test
     public void testDefault() {
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testSetFalse() {
         try {
             fValidator.setFeature(IDC_CHECKING, false);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkValidResult();
     }
     
+	@Test
     public void testSetTrue() {
         try {
             fValidator.setFeature(IDC_CHECKING, true);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();

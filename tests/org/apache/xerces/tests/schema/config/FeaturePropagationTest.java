@@ -17,6 +17,9 @@
 
 package org.apache.xerces.tests.schema.config;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -28,8 +31,6 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import junit.framework.TestCase;
-
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 import org.xml.sax.SAXNotSupportedException;
@@ -38,20 +39,19 @@ import org.xml.sax.SAXNotSupportedException;
  * @author Peter McCracken, IBM
  * @version $Id$
  */
-public class FeaturePropagationTest extends TestCase {
+public class FeaturePropagationTest {
     
     public final String FEATURE_STRING_DEFAULT_FALSE = "http://apache.org/xml/features/honour-all-schemaLocations";
     public final String FEATURE_STRING_DEFAULT_TRUE = "http://apache.org/xml/features/validation/schema-full-checking";
     public final String SECURITY_MANAGER = "http://apache.org/xml/properties/security-manager";
     
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(FeaturePropagationTest.class);
-    }
+    protected String name;
     
     public FeaturePropagationTest(String name) {
-        super(name);
+        this.name = name;
     }
     
+	@Test
     public void testPropertyReset() throws Exception {
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = makeSchema(factory, null);
@@ -59,12 +59,13 @@ public class FeaturePropagationTest extends TestCase {
         Object beforeReset = validator.getProperty(SECURITY_MANAGER);
         validator.setProperty(SECURITY_MANAGER, null);
         Object changed = validator.getProperty(SECURITY_MANAGER);
-        assertFalse("Property value should have changed after calling setProperty().", beforeReset != changed);
+        assertFalse(beforeReset != changed, "Property value should have changed after calling setProperty().");
         validator.reset();
         Object afterReset = validator.getProperty(SECURITY_MANAGER);
-        assertTrue("Property value should be the same after calling reset()", beforeReset == afterReset);
+        assertTrue(beforeReset == afterReset, "Property value should be the same after calling reset()");
     }
     
+	@Test
     public void testFeatureReset() throws Exception {
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         Schema schema = makeSchema(factory, null);
@@ -73,27 +74,28 @@ public class FeaturePropagationTest extends TestCase {
         validator.setFeature(FEATURE_STRING_DEFAULT_FALSE, true);
         validator.reset();
         boolean value = validator.getFeature(FEATURE_STRING_DEFAULT_TRUE);
-        assertTrue("After reset, value of feature on Validator should be true.", value);
+        assertTrue(value, "After reset, value of feature on Validator should be true.");
         value = validator.getFeature(FEATURE_STRING_DEFAULT_FALSE);
-        assertFalse("After reset, value of feature on Validator should be false.", value);        
+        assertFalse(value, "After reset, value of feature on Validator should be false.");        
     }
     
+	@Test
     public void testSecureProcessingFeaturePropagationAndReset() throws Exception {
         SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         boolean value;
         value = factory.getFeature(XMLConstants.FEATURE_SECURE_PROCESSING);
-        assertFalse("Default value of feature on SchemaFactory should have been false.", value);
+        assertFalse(value, "Default value of feature on SchemaFactory should have been false.");
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
         Schema schema = makeSchema(factory, null);
         Validator validator = schema.newValidator();
         value = validator.getFeature(XMLConstants.FEATURE_SECURE_PROCESSING);
-        assertTrue("Value of feature on Validator should have been true.", value);
+        assertTrue(value, "Value of feature on Validator should have been true.");
         validator.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, false);
         value = validator.getFeature(XMLConstants.FEATURE_SECURE_PROCESSING);
-        assertFalse("Value of feature on Validator should have been false.", value);
+        assertFalse(value, "Value of feature on Validator should have been false.");
         validator.reset();
         value = validator.getFeature(XMLConstants.FEATURE_SECURE_PROCESSING);
-        assertTrue("After reset, value of feature on Validator should be true.", value);
+        assertTrue(value, "After reset, value of feature on Validator should be true.");
     }
     
     /*
@@ -102,18 +104,22 @@ public class FeaturePropagationTest extends TestCase {
      * code is in a common base class.
      */
     
+	@Test
     public void testFeaturePropagationNull() throws Exception {
         checkFeaturesOnValidator(null);
     }
     
+	@Test
     public void testFeaturePropagationEmpty() throws Exception {
         checkFeaturesOnValidator(new Source[] {});
     }
     
+	@Test
     public void testFeaturePropagationSingle() throws Exception {
         checkFeaturesOnValidator(new Source[] {makeSource("base.xsd")});
     }
     
+	@Test
     public void testFeaturePropagationMultiple() throws Exception {
         checkFeaturesOnValidator(new Source[] {makeSource("base.xsd"), makeSource("idc.xsd")});
     }
@@ -125,9 +131,9 @@ public class FeaturePropagationTest extends TestCase {
             Validator validator = schema.newValidator();
             boolean value;
             value = validator.getFeature(FEATURE_STRING_DEFAULT_TRUE);
-            assertTrue("Default value of feature on Validator should have been true.", value);
+            assertTrue(value, "Default value of feature on Validator should have been true.");
             value = validator.getFeature(FEATURE_STRING_DEFAULT_FALSE);
-            assertFalse("Default value of feature on Validator should have been false.", value);
+            assertFalse(value, "Default value of feature on Validator should have been false.");
             
             // checking that the value propagates to the validator
             factory.setFeature(FEATURE_STRING_DEFAULT_TRUE, false);
@@ -135,17 +141,17 @@ public class FeaturePropagationTest extends TestCase {
             schema = makeSchema(factory, sources);
             validator = schema.newValidator();
             value = validator.getFeature(FEATURE_STRING_DEFAULT_TRUE);
-            assertFalse("Value of feature on Validator should have been false.", value);
+            assertFalse(value, "Value of feature on Validator should have been false.");
             value = validator.getFeature(FEATURE_STRING_DEFAULT_FALSE);
-            assertTrue("Value of feature on Validator should have been true.", value);
+            assertTrue(value, "Value of feature on Validator should have been true.");
             
             // checking that the validator contains a copy of the features, not a reference
             factory.setFeature(FEATURE_STRING_DEFAULT_TRUE, true);
             factory.setFeature(FEATURE_STRING_DEFAULT_FALSE, false);
             value = validator.getFeature(FEATURE_STRING_DEFAULT_TRUE);
-            assertFalse("Value of feature on Validator should have stayed false.", value);
+            assertFalse(value, "Value of feature on Validator should have stayed false.");
             value = validator.getFeature(FEATURE_STRING_DEFAULT_FALSE);
-            assertTrue("Value of feature on Validator should have stayed true.", value);            
+            assertTrue(value, "Value of feature on Validator should have stayed true.");            
         }
         catch (SAXNotRecognizedException e) {
             fail(e.getMessage());

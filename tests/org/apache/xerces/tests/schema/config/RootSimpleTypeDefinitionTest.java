@@ -17,10 +17,11 @@
 
 package org.apache.xerces.tests.schema.config;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
-
-import junit.framework.Assert;
 
 import org.apache.xerces.xs.ItemPSVI;
 import org.xml.sax.SAXException;
@@ -36,10 +37,6 @@ public class RootSimpleTypeDefinitionTest extends BaseTest {
     
     private final static String INVALID_TYPE_ERROR = "cvc-type.3.1.3";
     private final static String MININCLUSIVE_DERIVATION_ERROR = "cvc-minInclusive-valid";
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(RootSimpleTypeDefinitionTest.class);
-    }
     
     protected String getXMLDocument() {
         return "simpleType.xml";
@@ -63,17 +60,18 @@ public class RootSimpleTypeDefinitionTest extends BaseTest {
         typeNonNegInt = new QName(ns, "nonNegativeInteger", "xsd");
     }
     
+	@Test
     public void testSettingSimpleType() throws Exception {
         try {
             fValidator.setProperty(ROOT_TYPE, typeString);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());
@@ -83,17 +81,18 @@ public class RootSimpleTypeDefinitionTest extends BaseTest {
         assertTypeName("string", fRootNode.getTypeDefinition().getName());
     }
     
+	@Test
     public void testSettingInvalidSimpleType() throws Exception {
         try {
             fValidator.setProperty(ROOT_TYPE, typeNonNegInt);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertError(INVALID_TYPE_ERROR);

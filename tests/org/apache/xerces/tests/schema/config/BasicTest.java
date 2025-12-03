@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
 import org.apache.xerces.xs.ItemPSVI;
@@ -28,10 +29,6 @@ import org.apache.xerces.xs.ItemPSVI;
  */
 public class BasicTest extends BaseTest {
     
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(BasicTest.class);
-    }
-    
     protected String getXMLDocument() {
         return "base.xml";
     }
@@ -40,26 +37,32 @@ public class BasicTest extends BaseTest {
         return "base.xsd";
     }
     
+    public BasicTest() {
+        super("");
+    }
+    
     public BasicTest(String name) {
         super(name);
     }
     
+	@Test
     public void testSimpleValidation() {
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         doValidityAsserts();
     }
     
+	@Test
     public void testSimpleValidationWithTrivialXSIType() {
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(
                 "http://www.w3.org/2001/XMLSchema-instance", "type", "X");
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         doValidityAsserts();
     }

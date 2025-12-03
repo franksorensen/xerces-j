@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -32,8 +34,6 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import junit.framework.TestCase;
-
 import org.apache.xerces.dom.PSVIElementNSImpl;
 import org.apache.xerces.impl.Constants;
 import org.apache.xerces.impl.xs.SchemaGrammar;
@@ -41,6 +41,8 @@ import org.apache.xerces.xs.ElementPSVI;
 import org.apache.xerces.xs.ItemPSVI;
 import org.apache.xerces.xs.XSElementDeclaration;
 import org.apache.xerces.xs.XSTypeDefinition;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -48,7 +50,7 @@ import org.w3c.dom.Node;
  * @author Peter McCracken, IBM
  * @version $Id$
  */
-public abstract class BaseTest extends TestCase {
+public abstract class BaseTest {
     protected final static String ROOT_TYPE = Constants.XERCES_PROPERTY_PREFIX
         + Constants.ROOT_TYPE_DEFINITION_PROPERTY;
     
@@ -84,13 +86,15 @@ public abstract class BaseTest extends TestCase {
     
     protected abstract String getXMLDocument();
     
+    protected String name;
+    
     public BaseTest(String name) {
-        super(name);
+        this.name = name;
         fErrorHandler = new SpecialCaseErrorHandler(getRelevantErrorIDs());
     }
     
+    @BeforeEach
     protected void setUp() throws Exception {
-        super.setUp();
         
         DocumentBuilderFactory docFactory = DocumentBuilderFactory
         .newInstance();
@@ -113,6 +117,13 @@ public abstract class BaseTest extends TestCase {
         sf.setFeature(USE_GRAMMAR_POOL_ONLY, getUseGrammarPoolOnly());
         String schemaPath = packageDir + "/" + getSchemaFile();
         fSchemaURL = ClassLoader.getSystemResource(schemaPath);
+        
+        if (fSchemaURL == null) {
+            File file = new File("tests/" + schemaPath);
+            if (file.exists())
+                fSchemaURL = file.toURI().toURL();
+        }
+        
         if (fSchemaURL == null) {
             throw new FileNotFoundException("Couldn't find schema file for test: " + schemaPath);
         }
@@ -122,8 +133,8 @@ public abstract class BaseTest extends TestCase {
         fValidator.setFeature(DYNAMIC_VALIDATION, false);
     }
     
+    @AfterEach
     protected void tearDown() throws Exception {
-        super.tearDown();
         fValidator = null;
         fDocument = null;
         fRootNode = null;
@@ -178,7 +189,7 @@ public abstract class BaseTest extends TestCase {
                         : "notKnown");
         String message = "{validity} was <" + actualString
         + "> but it should have been <" + expectedString + ">";
-        assertEquals(message, expectedValidity, actualValidity);
+        assertEquals(expectedValidity, actualValidity, message);
     }
     
     protected void assertValidationAttempted(short expectedAttempted,
@@ -191,59 +202,57 @@ public abstract class BaseTest extends TestCase {
                         : "none");
         String message = "{validity} was <" + actualString
         + "> but it should have been <" + expectedString + ">";
-        assertEquals(message, expectedAttempted, actualAttempted);
+        assertEquals(expectedAttempted, actualAttempted, message);
     }
     
     protected void assertElementName(String expectedName, String actualName) {
-        assertEquals("Local name of element declaration is wrong.",
-                expectedName, actualName);
+        assertEquals(
+                expectedName, actualName, "Local name of element declaration is wrong.");
     }
     
     protected void assertElementNull(XSElementDeclaration elem) {
-        assertNull("Element declaration should be null.", elem);
+        assertNull(elem, "Element declaration should be null.");
     }
     
     protected void assertElementNamespace(String expectedName, String actualName) {
-        assertEquals("Namespace of element declaration is wrong.",
-                expectedName, actualName);
+        assertEquals(
+                expectedName, actualName, "Namespace of element declaration is wrong.");
     }
     
     protected void assertElementNamespaceNull(String actualName) {
-        assertNull("Local name of element declaration should be null.",
-                actualName);
+        assertNull(actualName, "Local name of element declaration should be null.");
     }
     
     protected void assertTypeName(String expectedName, String actualName) {
-        assertEquals("Local name of type definition is wrong.", expectedName,
-                actualName);
+        assertEquals(expectedName, actualName, 
+                    "Local name of type definition is wrong.");
     }
     
     protected void assertTypeNull(XSTypeDefinition type) {
-        assertNull("Type definition should be null.", type);
+        assertNull(type, "Type definition should be null.");
     }
     
     protected void assertTypeNamespace(String expectedName, String actualName) {
-        assertEquals("Namespace of type definition is wrong.", expectedName,
-                actualName);
+        assertEquals(expectedName, actualName,
+                "Namespace of type definition is wrong.");
     }
     
     protected void assertTypeNamespaceNull(String actualName) {
-        assertNull("Namespace of type definition should be null.", actualName);
+        assertNull(actualName, "Namespace of type definition should be null.");
     }
     
     protected void assertError(String error) {
-        assertTrue("Error <" + error + "> should have occured, but did not.",
-                fErrorHandler.specialCaseFound(error));
+        assertTrue(fErrorHandler.specialCaseFound(error), "Error <" + error + "> should have occured, but did not.");
     }
     
     protected void assertNoError(String error) {
-        assertFalse("Error <" + error
-                + "> should not have occured (but it did)", fErrorHandler
-                .specialCaseFound(error));
+        assertFalse(fErrorHandler
+                .specialCaseFound(error), "Error <" + error
+                + "> should not have occured (but it did)");
     }
     
     protected void assertAnyType(XSTypeDefinition type) {
-        assertEquals("Type is supposed to be anyType", SchemaGrammar.fAnyType,
-                type);
+        assertEquals(SchemaGrammar.fAnyType,
+                type, "Type is supposed to be anyType");
     }
 }

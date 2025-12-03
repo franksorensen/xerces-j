@@ -20,6 +20,7 @@ package org.apache.xerces.tests.schema.annotations;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -42,7 +43,21 @@ public class TestCase {
         String packageDir = this.getClass().getPackage().getName().replace('.',
                 File.separatorChar);
         String documentPath = packageDir + "/" + path;
-        URL url = this.getClass().getClassLoader().getResource(documentPath);
+        URL url = this.getClass().getResource(documentPath);
+        
+        if (url == null) {
+            documentPath = "tests" + File.separatorChar + documentPath; 
+        
+            File file = new File(documentPath);
+            if (file.exists()) {
+                try {
+                    url = file.toURI().toURL();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
         if (url == null) {
             String message = "Couldn't find xml file for test: " + documentPath;
             fail (message);

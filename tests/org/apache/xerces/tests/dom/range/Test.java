@@ -138,7 +138,7 @@ public class Test {
    /** Prints the usage. */
    private static void printUsage() {
 
-      System.err.println("usage: java dom.range.Test (option) (stdout)");
+      System.err.println("usage: java -m " + Test.class.getModule() + "/" + Test.class + " (option) (stdout)");
       System.err.println();
       System.err.println("options:");
       System.err.println("  all             all tests");

@@ -16,8 +16,9 @@
  */
 package org.apache.xerces.tests.dom.range;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.DocumentImpl;
 import org.w3c.dom.Element;
@@ -33,13 +34,14 @@ import org.w3c.dom.ranges.Range;
  * 
  * @version $Id$
  */
-public class TestCompare extends TestCase 
+ 
+public class TestCompare 
 {
     /**
      * Creates an instance of the test
      */
-    public TestCompare(String name) {
-            super(name);
+    public TestCompare() {
+            
     }
 
     /**
@@ -172,7 +174,7 @@ public class TestCompare extends TestCase
             for( int j=0; j<ranges.length; ++j )
             {
                 int result = ranges[i].compareBoundaryPoints( how, ranges[j] );
-                assertTrue( "Compare returned the wrong value i="+i+" j="+j + " result="+result, result == results[i][j] );
+                assertTrue( result == results[i][j], "Compare returned the wrong value i="+i+" j="+j + " result="+result );
             }
         }
     }
@@ -182,6 +184,7 @@ public class TestCompare extends TestCase
      * specification, compare each starting point to every other 
      * starting point.
      */
+    @Test
     public void testCompareStartToStart()
     {
         doTestCompare( Range.START_TO_START, results_START_TO_START );
@@ -192,6 +195,7 @@ public class TestCompare extends TestCase
      * specification, compare each starting point to every other 
      * ending point.
      */
+    @Test
     public void testCompareStartToEnd()
     {
         doTestCompare( Range.START_TO_END, results_START_TO_END );
@@ -202,6 +206,7 @@ public class TestCompare extends TestCase
      * specification, compare each ending point to every other 
      * starting point.
      */
+    @Test
     public void testCompareEndToStart()
     {
         doTestCompare( Range.END_TO_START, results_END_TO_START );
@@ -212,24 +217,12 @@ public class TestCompare extends TestCase
      * specification, compare each ending point to every other 
      * ending point.
      */
+    @Test
     public void testCompareEndToEnd()
     {
         doTestCompare( Range.END_TO_END, results_END_TO_END );
     }
 
-    /**
-     * Returns the set of all tests in this class
-     */
-    public static junit.framework.Test suite() {
-        return new TestSuite( TestCompare.class );
-    }
-
-    /**
-     * Utility for invoking the class from the command line.
-     */
-    public static void main (String[] args) {
-            junit.textui.TestRunner.run (suite());
-    }
 
 }
 

@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.xs.ItemPSVI;
 
@@ -26,10 +27,6 @@ import org.apache.xerces.xs.ItemPSVI;
  * @version $Id$
  */
 public class UseGrammarPoolOnly_True_Test extends BaseTest {
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(UseGrammarPoolOnly_True_Test.class);
-    }
     
     protected String getXMLDocument() {
         return "otherNamespace.xml";
@@ -55,12 +52,13 @@ public class UseGrammarPoolOnly_True_Test extends BaseTest {
      * this test simply ensures that the existing functionality did not disappear.
      * -PM
      */
+	@Test
     public void testUsingOnlyGrammarPool() {
         try {
             validateDocument();
         } 
         catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_NOTKNOWN, fRootNode.getValidity());

@@ -17,13 +17,14 @@
 
 package org.apache.xerces.tests.schema.config;
 
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.validation.SchemaFactory;
-
-import junit.framework.Assert;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
 import org.apache.xerces.impl.xs.SchemaSymbols;
@@ -47,10 +48,6 @@ public class RootTypeDefinitionTest extends BaseTest {
     
     private final static String INVALID_DERIVATION_ERROR = "cvc-elt.4.3";
     
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(RootTypeDefinitionTest.class);
-    }
-    
     protected String getXMLDocument() {
         return "base.xml";
     }
@@ -72,16 +69,18 @@ public class RootTypeDefinitionTest extends BaseTest {
         typeOtherNamespace = new QName("xslt.unittests", "W", "unit");
     }
     
+	@Test
     public void testDefault() {
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testUsingDocumentBuilderFactory() throws Exception {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setAttribute(ROOT_TYPE, typeX);
@@ -103,50 +102,53 @@ public class RootTypeDefinitionTest extends BaseTest {
         assertTypeName("X", fRootNode.getTypeDefinition().getName());
     }
     
+	@Test
     public void testSettingNull() {
         try {
             fValidator.setProperty(ROOT_TYPE, null);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testSettingToUnknownType() {
         try {
             fValidator.setProperty(ROOT_TYPE, unknownType);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertError(UNKNOWN_TYPE_ERROR);
         checkDefault();
     }
     
+	@Test
     public void testSettingToEqualType() {
         try {
             fValidator.setProperty(ROOT_TYPE, typeX);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());
@@ -156,19 +158,20 @@ public class RootTypeDefinitionTest extends BaseTest {
         assertTypeName("X", fRootNode.getTypeDefinition().getName());
     }
     
+	@Test
     public void testSettingToDerivedType() {
         // this is required to make it a valid type Y node
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(null, "attr", "typeY");
         try {
             fValidator.setProperty(ROOT_TYPE, typeY);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());
@@ -178,17 +181,18 @@ public class RootTypeDefinitionTest extends BaseTest {
         assertTypeName("Y", fRootNode.getTypeDefinition().getName());
     }
     
+	@Test
     public void testSettingToNonDerivedType() {
         try {
             fValidator.setProperty(ROOT_TYPE, typeZ);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());
@@ -198,6 +202,7 @@ public class RootTypeDefinitionTest extends BaseTest {
         assertTypeName("Z", fRootNode.getTypeDefinition().getName());
     }
     
+	@Test
     public void testSettingToOtherSchemaType() {
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(SchemaSymbols.URI_XSI,
                 SchemaSymbols.XSI_SCHEMALOCATION,
@@ -205,13 +210,13 @@ public class RootTypeDefinitionTest extends BaseTest {
         try {
             fValidator.setProperty(ROOT_TYPE, typeOtherNamespace);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());
@@ -223,6 +228,7 @@ public class RootTypeDefinitionTest extends BaseTest {
                 .getNamespace());
     }
     
+	@Test
     public void testSettingTypeAndXSIType() {
         // this is required to make it a valid type Y node
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(null, "attr", "typeY");
@@ -231,13 +237,13 @@ public class RootTypeDefinitionTest extends BaseTest {
         try {
             fValidator.setProperty(ROOT_TYPE, typeX);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertValidity(ItemPSVI.VALIDITY_VALID, fRootNode.getValidity());
@@ -247,19 +253,20 @@ public class RootTypeDefinitionTest extends BaseTest {
         assertTypeName("Y", fRootNode.getTypeDefinition().getName());
     }
     
+	@Test
     public void testSettingTypeAndInvalidXSIType() {
         ((PSVIElementNSImpl) fRootNode).setAttributeNS(SchemaSymbols.URI_XSI,
                 SchemaSymbols.XSI_TYPE, "Z");
         try {
             fValidator.setProperty(ROOT_TYPE, typeX);
         } catch (SAXException e1) {
-            Assert.fail("Problem setting property: " + e1.getMessage());
+            fail("Problem setting property: " + e1.getMessage());
         }
         
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         assertError(INVALID_DERIVATION_ERROR);

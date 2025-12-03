@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.xs.ElementPSVI;
 import org.apache.xerces.xs.ItemPSVI;
@@ -33,10 +34,6 @@ public class SurrogatePairLengthTest extends BaseTest {
     }
     
     private static final String LENGTH_ERROR = "cvc-length-valid";
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(SurrogatePairLengthTest.class);
-    }
     
     protected String getXMLDocument() {
         return "surrogate.xml";
@@ -55,12 +52,13 @@ public class SurrogatePairLengthTest extends BaseTest {
     }
     
     // Can only test when the property is set
+	@Test
     public void testSetTrue() {
         try {
             validateDocument();
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkValidResult();

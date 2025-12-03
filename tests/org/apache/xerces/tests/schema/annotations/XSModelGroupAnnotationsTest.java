@@ -19,6 +19,10 @@ package org.apache.xerces.tests.schema.annotations;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSComplexTypeDefinition;
 import org.apache.xerces.xs.XSImplementation;
@@ -55,6 +59,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
      * This method is called before every test case method, to set up the test
      * fixture.
      */
+    @BeforeEach
     protected void setUp() {
         try {
             // get DOM Implementation using DOM Registry
@@ -83,6 +88,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
      * This method is called before every test case method, to tears down the
      * test fixture.
      */
+    @AfterEach
     protected void tearDown() {
         fConfig
                 .setParameter(
@@ -93,6 +99,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
     /**
      * Test #1.
      */
+	@Test
     public void testGroup1Annotation() {
         fConfig
                 .setParameter(
@@ -115,6 +122,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
     /**
      * Test #2.
      */
+	@Test
     public void testGroup2Annotation() {
         fConfig
                 .setParameter(
@@ -186,6 +194,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
                 "TEST3_NO_ANNOTATIONS_" + synth);
     }
 
+	@Test
     public void testGroup3Annotation() {
         group3AnnotationTest(Boolean.FALSE);
         group3AnnotationTest(Boolean.TRUE);
@@ -225,6 +234,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
                 "TEST4_NO_ANNOTATIONS_" + synth);
     }
 
+	@Test
     public void testGroup4Annotation() {
         group4AnnotationTest(Boolean.FALSE);
         group4AnnotationTest(Boolean.TRUE);
@@ -282,6 +292,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
 
     }
 
+	@Test
     public void testGroup5Annotation() {
         group5AnnotationTest(Boolean.FALSE);
         group5AnnotationTest(Boolean.TRUE);
@@ -358,6 +369,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
 
     }
 
+	@Test
     public void testGroup6Annotation() {
         group6AnnotationTest(Boolean.FALSE);
         group6AnnotationTest(Boolean.TRUE);
@@ -415,6 +427,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         }
     }
 
+	@Test
     public void testGroup7Annotation() {
         group7AnnotationTest(Boolean.FALSE);
         group7AnnotationTest(Boolean.TRUE);
@@ -455,6 +468,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
                 "TEST8_NO_ANNOTATIONS_" + synth);
     }
 
+	@Test
     public void testGroup8Annotation() {
         group8AnnotationTest(Boolean.FALSE);
         group8AnnotationTest(Boolean.TRUE);
@@ -495,6 +509,7 @@ public class XSModelGroupAnnotationsTest extends TestCase {
                 "TEST9_NO_ANNOTATIONS_" + synth);
     }
 
+	@Test
     public void testGroup9Annotation() {
         group9AnnotationTest(Boolean.FALSE);
         group9AnnotationTest(Boolean.TRUE);

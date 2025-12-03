@@ -5,7 +5,8 @@ module xercesImpl {
     requires jdk.xml.dom;
     
     requires static xml.resolver;
-    requires junit;
+    requires org.junit.jupiter.api;
+    requires org.junit.platform.suite.api;
     
     exports org.apache.xerces.dom;
     exports org.apache.xerces.jaxp;

@@ -17,37 +17,32 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
+import org.junit.platform.suite.api.SuiteDisplayName;
 
 /**
  * @author Peter McCracken, IBM
  * @version $Id$
  */
+@Suite
+@SuiteDisplayName("Tests for various schema validation configurations.")
+@SelectClasses({ BasicTest.class,
+    RootTypeDefinitionTest.class,
+    RootSimpleTypeDefinitionTest.class,
+    IgnoreXSIType_C_A_Test.class,
+    IgnoreXSIType_C_C_Test.class,
+    IgnoreXSIType_A_A_Test.class,
+    IgnoreXSIType_A_C_Test.class,
+    IgnoreXSIType_C_AC_Test.class,
+    IgnoreXSIType_C_CA_Test.class,
+    IdIdrefCheckingTest.class,
+    UnparsedEntityCheckingTest.class,
+    IdentityConstraintCheckingTest.class,
+    UseGrammarPoolOnly_True_Test.class,
+    UseGrammarPoolOnly_False_Test.class,
+    FixedAttrTest.class,
+    FeaturePropagationTest.class }) 
 public class AllTests {
     
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AllTests.suite());
-    }
-    
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Tests for various schema validation configurations.");
-        suite.addTestSuite(BasicTest.class);
-        suite.addTestSuite(RootTypeDefinitionTest.class);
-        suite.addTestSuite(RootSimpleTypeDefinitionTest.class);
-        suite.addTestSuite(IgnoreXSIType_C_A_Test.class);
-        suite.addTestSuite(IgnoreXSIType_C_C_Test.class);
-        suite.addTestSuite(IgnoreXSIType_A_A_Test.class);
-        suite.addTestSuite(IgnoreXSIType_A_C_Test.class);
-        suite.addTestSuite(IgnoreXSIType_C_AC_Test.class);
-        suite.addTestSuite(IgnoreXSIType_C_CA_Test.class);
-        suite.addTestSuite(IdIdrefCheckingTest.class);
-        suite.addTestSuite(UnparsedEntityCheckingTest.class);
-        suite.addTestSuite(IdentityConstraintCheckingTest.class);
-        suite.addTestSuite(UseGrammarPoolOnly_True_Test.class);
-        suite.addTestSuite(UseGrammarPoolOnly_False_Test.class);
-        suite.addTestSuite(FixedAttrTest.class);
-        suite.addTestSuite(FeaturePropagationTest.class);
-        return suite;
-    }
 }

@@ -17,9 +17,10 @@
 
 package org.apache.xerces.tests.dom.traversal;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
+import org.junit.platform.suite.api.SelectClasses;
+import org.junit.platform.suite.api.Suite;
+import org.junit.platform.suite.api.SuiteDisplayName;
+
 
 /**
  * All Element Traversal API Tests
@@ -27,17 +28,10 @@ import junit.textui.TestRunner;
  * @author Michael Glavassevich, IBM
  * @version $Id$
  */
+@Suite
+@SuiteDisplayName("Tests for the Element Traversal API.")
+@SelectClasses({ BasicTest.class, ComplexTest.class })
 public class AllTests {
     
-    public static void main(String[] args) {
-        TestRunner.run(AllTests.suite());
-    }
-    
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Tests for the Element Traversal API.");
-        suite.addTestSuite(BasicTest.class);
-        suite.addTestSuite(ComplexTest.class);
-        return suite;
-    }
 
 }

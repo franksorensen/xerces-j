@@ -17,7 +17,8 @@
 
 package org.apache.xerces.tests.schema.config;
 
-import junit.framework.Assert;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
 import org.apache.xerces.xs.ItemPSVI;
@@ -33,10 +34,6 @@ public class IdIdrefCheckingTest extends BaseTest {
     public static final String DUPLICATE_ID = "cvc-id.2";
     
     public static final String NO_ID_BINDING = "cvc-id.1";
-    
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(IdIdrefCheckingTest.class);
-    }
     
     protected String getXMLDocument() {
         return "idIdref.xml";
@@ -62,41 +59,44 @@ public class IdIdrefCheckingTest extends BaseTest {
         super.tearDown();
     }
     
+	@Test
     public void testDefault() {
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();
     }
     
+	@Test
     public void testSetFalse() {
         try {
             fValidator.setFeature(ID_IDREF_CHECKING, false);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkValidResult();
     }
     
+	@Test
     public void testSetTrue() {
         try {
             fValidator.setFeature(ID_IDREF_CHECKING, true);
         } catch (SAXException e) {
-            Assert.fail("Error setting feature.");
+            fail("Error setting feature.");
         }
         try {
             validateDocument();
         } catch (Exception e) {
-            Assert.fail("Validation failed: " + e.getMessage());
+            fail("Validation failed: " + e.getMessage());
         }
         
         checkDefault();

@@ -17,6 +17,10 @@
 
 package org.apache.xerces.tests.dom.traversal;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.ElementTraversal;
 
@@ -28,13 +32,15 @@ public class BasicTest extends AbstractTestCase {
     
     private static final String DOC1 = "<root>1<a/>2<b/>3<c/>4<d/><!-- foo -->5<e/>6<?target data?></root>";
     private static final String DOC2 = "<root>1<a>2<b/>7<e/>9</a>3<c>5<d/>0<!-- bar -->8<f/>6</c>4</root>";
-    
+
+    @Test
     public void testGetFirstChild1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getFirstElementChild();
         assertEquals("a", e.getNodeName());
     }
     
+    @Test
     public void testGetFirstChild2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getFirstElementChild();
@@ -44,12 +50,14 @@ public class BasicTest extends AbstractTestCase {
         assertEquals("b", e.getNodeName());
     }
     
+    @Test
     public void testGetLastChild1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getLastElementChild();
         assertEquals("e", e.getNodeName());
     }
     
+    @Test
     public void testGetLastChild2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getLastElementChild();
@@ -59,6 +67,7 @@ public class BasicTest extends AbstractTestCase {
         assertEquals("f", e.getNodeName());
     }
     
+    @Test
     public void testGetNextElementSibling1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getFirstElementChild();
@@ -73,6 +82,7 @@ public class BasicTest extends AbstractTestCase {
         assertEquals("d", e.getNodeName());
     }
     
+    @Test
     public void testGetNextElementSibling2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getFirstElementChild();
@@ -87,6 +97,7 @@ public class BasicTest extends AbstractTestCase {
         assertEquals("f", e.getNodeName());
     }
     
+    @Test
     public void testGetPreviousElementSibling1() {
         ElementTraversal et = parse(DOC1);
         Element e = et.getLastElementChild();
@@ -101,6 +112,7 @@ public class BasicTest extends AbstractTestCase {
         assertEquals("b", e.getNodeName());
     }
     
+    @Test
     public void testGetPreviousElementSibling2() {
         ElementTraversal et = parse(DOC2);
         Element e = et.getLastElementChild();
@@ -115,11 +127,13 @@ public class BasicTest extends AbstractTestCase {
         assertEquals("b", e.getNodeName());
     }
     
+    @Test
     public void testChildElementCount1() {
         ElementTraversal et = parse(DOC1);
         assertEquals(5, et.getChildElementCount());
     }
     
+    @Test
     public void testChildElementCount2() {
         ElementTraversal et = parse(DOC2);
         assertEquals(2, et.getChildElementCount());
