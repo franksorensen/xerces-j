@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSImplementation;
 import org.apache.xerces.xs.XSLoader;
@@ -95,10 +97,10 @@ public class XSNotationAnnotationsTest extends TestCase {
         XSNotationDeclaration notation = model.getNotationDeclaration(
                 "notation1", "XSNotationAnnotationsTest");
         XSAnnotation annotation = notation.getAnnotation();
-        assertNull("TEST1_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST1_NO_ANNOTATION");
 
         XSObjectList annotations = notation.getAnnotations();
-        assertEquals("TEST1_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST1_NO_ANNOTATIONS");
 
     }
 
@@ -117,10 +119,10 @@ public class XSNotationAnnotationsTest extends TestCase {
         XSNotationDeclaration notation = model.getNotationDeclaration(
                 "notation2", "XSNotationAnnotationsTest");
         XSAnnotation annotation = notation.getAnnotation();
-        assertNotNull("TEST2_ANNOTATION", annotation);
+        assertNotNull(annotation, "TEST2_ANNOTATION");
 
         XSObjectList annotations = notation.getAnnotations();
-        assertEquals("TEST2_ANNOTATIONS", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "TEST2_ANNOTATIONS");
     }
 
     /**
@@ -138,10 +140,10 @@ public class XSNotationAnnotationsTest extends TestCase {
         XSNotationDeclaration notation = model.getNotationDeclaration(
                 "notation2", "XSNotationAnnotationsTest");
         XSAnnotation annotation = notation.getAnnotation();
-        assertNull("TEST3_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST3_NO_ANNOTATION");
 
         XSObjectList annotations = notation.getAnnotations();
-        assertEquals("TEST3_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST3_NO_ANNOTATIONS");
 
     }
 
@@ -175,16 +177,17 @@ public class XSNotationAnnotationsTest extends TestCase {
         XSNotationDeclaration notation = model.getNotationDeclaration(
                 "notation3", "XSNotationAnnotationsTest");
         XSAnnotation annotation = notation.getAnnotation();
-        assertNotNull("TEST4_ANNOTATION", annotation);
-        assertEquals("TEST4_ANNOTATION_EQ", trim(expected), trim(annotation
-                .getAnnotationString()));
+        assertNotNull(annotation, "TEST4_ANNOTATION");
+        assertEquals(trim(expected), trim(annotation
+                .getAnnotationString()), "TEST4_ANNOTATION_EQ");
 
         XSObjectList annotations = notation.getAnnotations();
-        assertEquals("TEST4_ANNOTATIONS", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "TEST4_ANNOTATIONS");
         assertEquals(
-                "TEST4_ANNOTATIONS_EQ",
                 trim(expected),
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST4_ANNOTATIONS_EQ");
     }
 
     /**
@@ -217,19 +220,17 @@ public class XSNotationAnnotationsTest extends TestCase {
         XSNotationDeclaration notation = model.getNotationDeclaration(
                 "notation4", "XSNotationAnnotationsTest");
         XSAnnotation annotation = notation.getAnnotation();
-        assertNotNull("TEST5_ANNOTATION", annotation);
-        assertEquals("TEST5_ANNOTATION_EQ", trim(expected), trim(annotation
-                .getAnnotationString()));
+        assertNotNull(annotation, "TEST5_ANNOTATION");
+        assertEquals(trim(expected), trim(annotation
+                .getAnnotationString()), "TEST5_ANNOTATION_EQ");
 
         XSObjectList annotations = notation.getAnnotations();
-        assertEquals("TEST5_ANNOTATIONS", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "TEST5_ANNOTATIONS");
         assertEquals(
-                "TEST5_ANNOTATIONS_EQ",
                 trim(expected),
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST5_ANNOTATIONS_EQ");
     }
 
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(XSNotationAnnotationsTest.class);
-    }
 }

@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSComplexTypeDefinition;
 import org.apache.xerces.xs.XSElementDeclaration;
@@ -112,18 +114,18 @@ public class XSParticleAnnotationsTest extends TestCase {
         XSModelGroup sequence = (XSModelGroup) ct.getParticle().getTerm();
         XSParticle element = (XSParticle) sequence.getParticles().item(0);
         XSObjectList annotations = element.getAnnotations();
-        assertEquals("TEST1_NO_ANNOTATIONS_" + synth, 0, annotations
-                .getLength());
+        assertEquals(0, annotations
+                .getLength(), "TEST1_NO_ANNOTATIONS_" + synth);
 
         XSParticle any = (XSParticle) sequence.getParticles().item(1);
         annotations = any.getAnnotations();
-        assertEquals("TEST1_NO_ANNOTATIONS_" + synth, 0, annotations
-                .getLength());
+        assertEquals(0, annotations
+                .getLength(), "TEST1_NO_ANNOTATIONS_" + synth);
 
         XSParticle choice = (XSParticle) sequence.getParticles().item(1);
         annotations = choice.getAnnotations();
-        assertEquals("TEST1_NO_ANNOTATIONS_" + synth, 0, annotations
-                .getLength());
+        assertEquals(0, annotations
+                .getLength(), "TEST1_NO_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -149,18 +151,18 @@ public class XSParticleAnnotationsTest extends TestCase {
         XSModelGroup sequence = (XSModelGroup) ct.getParticle().getTerm();
         XSParticle element = (XSParticle) sequence.getParticles().item(0);
         XSObjectList annotations = element.getAnnotations();
-        assertEquals("TEST2_NO_ANNOTATIONS_" + synth, (synth.booleanValue() == true) ? 1 : 0,
-                annotations.getLength());
+        assertEquals((synth.booleanValue() == true) ? 1 : 0,
+                annotations.getLength(), "TEST2_NO_ANNOTATIONS_" + synth);
 
         XSParticle any = (XSParticle) sequence.getParticles().item(1);
         annotations = any.getAnnotations();
-        assertEquals("TEST2_NO_ANNOTATIONS_" + synth, (synth.booleanValue() == true) ? 1 : 0,
-                annotations.getLength());
+        assertEquals((synth.booleanValue() == true) ? 1 : 0,
+                annotations.getLength(), "TEST2_NO_ANNOTATIONS_" + synth);
 
         XSParticle choice = (XSParticle) sequence.getParticles().item(1);
         annotations = choice.getAnnotations();
-        assertEquals("TEST2_NO_ANNOTATIONS_" + synth, (synth.booleanValue() == true) ? 1 : 0,
-                annotations.getLength());
+        assertEquals((synth.booleanValue() == true) ? 1 : 0,
+                annotations.getLength(), "TEST2_NO_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -192,18 +194,18 @@ public class XSParticleAnnotationsTest extends TestCase {
 
         XSParticle all = ct.getParticle();
         XSObjectList annotations = all.getAnnotations();
-        assertEquals("TEST3_ANNOTATIONS_" + synth, (synth.booleanValue() == true) ? 1 : 0, annotations
-                .getLength());
+        assertEquals((synth.booleanValue() == true) ? 1 : 0, annotations
+                .getLength(), "TEST3_ANNOTATIONS_" + synth);
         if ((synth.booleanValue() == true))
-            assertEquals("TEST3_ANNOTATIONS_" + synth, expected,
+            assertEquals(expected,
                     trim(((XSAnnotation) annotations.item(0))
-                            .getAnnotationString()));
+                            .getAnnotationString()), "TEST3_ANNOTATIONS_" + synth);
 
         XSParticle element = (XSParticle) ((XSModelGroup) all.getTerm())
                 .getParticles().item(0);
         annotations = element.getAnnotations();
-        assertEquals("TEST3_ANNOTATIONS_" + synth, (synth.booleanValue() == true) ? 1 : 0, annotations
-                .getLength());
+        assertEquals((synth.booleanValue() == true) ? 1 : 0, annotations
+                .getLength(), "TEST3_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -242,16 +244,18 @@ public class XSParticleAnnotationsTest extends TestCase {
 
         XSObjectList annotations = all.getAnnotations();
         assertEquals(
-                "TEST4_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST4_ANNOTATIONS_" + synth);
 
         XSParticle element = (XSParticle) all.getParticles().item(0);
         annotations = element.getAnnotations();
         assertEquals(
-                "TEST4_ANNOTATIONS_2_" + synth,
                 expected2,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST4_ANNOTATIONS_2_" + synth);
 
         XSElementDeclaration elementDecl = (XSElementDeclaration) element
                 .getTerm();
@@ -260,9 +264,10 @@ public class XSParticleAnnotationsTest extends TestCase {
         XSParticle choice = ct.getParticle();
         annotations = choice.getAnnotations();
         assertEquals(
-                "TEST4_ANNOTATIONS_3_" + synth,
                 expected3,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST4_ANNOTATIONS_3_" + synth);
     }
 
     /**
@@ -308,15 +313,17 @@ public class XSParticleAnnotationsTest extends TestCase {
 
         XSObjectList annotations = elem2.getAnnotations();
         assertEquals(
-                "TEST5_ANNOTATIONS_1_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST5_ANNOTATIONS_1_" + synth);
 
         annotations = elemDecl2.getAnnotations();
         assertEquals(
-                "TEST5_ANNOTATIONS_2_" + synth,
                 expected2,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST5_ANNOTATIONS_2_" + synth);
 
         if ((synth.booleanValue() == true)) {
             XSParticle elem3 = (XSParticle) sequencegrp.getParticles().item(1);
@@ -324,13 +331,13 @@ public class XSParticleAnnotationsTest extends TestCase {
                     .getTerm();
 
             annotations = elem3.getAnnotations();
-            assertEquals("TEST5_ANNOTATIONS_3_" + synth, 0, annotations
-                    .getLength());
+            assertEquals(0, annotations
+                    .getLength(), "TEST5_ANNOTATIONS_3_" + synth);
 
             annotations = elemDecl3.getAnnotations();
-            assertEquals("TEST5_ANNOTATIONS_4_" + synth, expected3,
+            assertEquals(expected3,
                     trim(((XSAnnotation) annotations.item(0))
-                            .getAnnotationString()));
+                            .getAnnotationString()), "TEST5_ANNOTATIONS_4_" + synth);
         }
     }
 
@@ -391,15 +398,17 @@ public class XSParticleAnnotationsTest extends TestCase {
         XSElementDeclaration elemDecl2 = (XSElementDeclaration) elem2.getTerm();
         XSObjectList annotations = elem2.getAnnotations();
         assertEquals(
-                "TEST6_ANNOTATIONS_1_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6_ANNOTATIONS_1_" + synth);
 
         annotations = elemDecl2.getAnnotations();
         assertEquals(
-                "TEST6_ANNOTATIONS_2_" + synth,
                 expected2,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6_ANNOTATIONS_2_" + synth);
 
         if (synth.booleanValue() == true) {
             XSParticle elem3 = (XSParticle) sequencegrp.getParticles().item(1);
@@ -407,28 +416,30 @@ public class XSParticleAnnotationsTest extends TestCase {
                     .getTerm();
 
             annotations = elem3.getAnnotations();
-            assertEquals("TEST6_ANNOTATIONS_3_" + synth, 0, annotations
-                    .getLength());
+            assertEquals(0, annotations
+                    .getLength(), "TEST6_ANNOTATIONS_3_" + synth);
 
             annotations = elemDecl3.getAnnotations();
-            assertEquals("TEST6_ANNOTATIONS_4_" + synth, expected3,
+            assertEquals(expected3,
                     trim(((XSAnnotation) annotations.item(0))
-                            .getAnnotationString()));
+                            .getAnnotationString()), "TEST6_ANNOTATIONS_4_" + synth);
         }
 
         XSParticle elem3 = (XSParticle) sequencegrp.getParticles().item(2);
         XSElementDeclaration elemDecl3 = (XSElementDeclaration) elem3.getTerm();
         annotations = elem3.getAnnotations();
         assertEquals(
-                "TEST6_ANNOTATIONS_1_" + synth,
                 expected4,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6_ANNOTATIONS_1_" + synth);
 
         annotations = elemDecl3.getAnnotations();
         assertEquals(
-                "TEST6_ANNOTATIONS_2_" + synth,
                 expected5,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6_ANNOTATIONS_2_" + synth);
 
         if (synth.booleanValue() == true) {
             XSParticle elem4 = (XSParticle) sequencegrp.getParticles().item(3);
@@ -436,21 +447,22 @@ public class XSParticleAnnotationsTest extends TestCase {
                     .getTerm();
 
             annotations = elem4.getAnnotations();
-            assertEquals("TEST6_ANNOTATIONS_3_" + synth, 1, annotations
-                    .getLength());
+            assertEquals(1, annotations
+                    .getLength(), "TEST6_ANNOTATIONS_3_" + synth);
 
             annotations = elemDecl4.getAnnotations();
-            assertEquals("TEST6_ANNOTATIONS_4_" + synth, expected6,
+            assertEquals(expected6,
                     trim(((XSAnnotation) annotations.item(0))
-                            .getAnnotationString()));
+                            .getAnnotationString()), "TEST6_ANNOTATIONS_4_" + synth);
         }
 
         XSParticle any = (XSParticle) sequencegrp.getParticles().item(4);
         annotations = any.getAnnotations();
         assertEquals(
-                "TEST6_ANNOTATIONS_1_" + synth,
                 expected7,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6_ANNOTATIONS_1_" + synth);
     }
 
     /**
@@ -501,75 +513,77 @@ public class XSParticleAnnotationsTest extends TestCase {
 
         XSObjectList annotations = choice.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_1_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_1_" + synth);
 
         XSModelGroup mg = (XSModelGroup) choice.getTerm();
         annotations = mg.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_2_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_2_" + synth);
 
         XSParticle seq = (XSParticle) mg.getParticles().item(0);
         annotations = seq.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_3_" + synth,
                 expected1,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_3_" + synth);
         mg = (XSModelGroup) seq.getTerm();
         annotations = mg.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_4_" + synth,
                 expected1,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_4_" + synth);
 
         XSParticle elem1 = (XSParticle) mg.getParticles().item(0);
         annotations = elem1.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_5_" + synth,
                 expected2,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_5_" + synth);
         XSElementDeclaration elem = (XSElementDeclaration) elem1.getTerm();
         XSComplexTypeDefinition ct2 = (XSComplexTypeDefinition) elem
                 .getTypeDefinition();
         XSParticle all = ct2.getParticle();
         annotations = all.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_6_" + synth,
                 expected3,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_6_" + synth);
         mg = (XSModelGroup) all.getTerm();
         annotations = mg.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_7_" + synth,
                 expected3,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_7_" + synth);
 
         XSParticle seq2 = (XSParticle) mg.getParticles().item(0);
         annotations = seq2.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_8_" + synth,
                 expected4,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_8_" + synth);
 
         mg = (XSModelGroup) seq.getTerm();
         XSParticle any = (XSParticle) mg.getParticles().item(1);
         annotations = any.getAnnotations();
         assertEquals(
-                "TEST7_ANNOTATIONS_9_" + synth,
                 expected5,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ANNOTATIONS_9_" + synth);
 
     }
 
-    /**
-     * 
-     * @param args
-     */
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(XSParticleAnnotationsTest.class);
-    }
 
 }

@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSComplexTypeDefinition;
 import org.apache.xerces.xs.XSImplementation;
@@ -105,9 +107,9 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = mgd.getModelGroup();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertNull("TEST1_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST1_NO_ANNOTATION");
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST1_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST1_NO_ANNOTATIONS");
     }
 
     /**
@@ -127,9 +129,9 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = mgd.getModelGroup();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertNull("TEST2_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST2_NO_ANNOTATION");
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST2_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST2_NO_ANNOTATIONS");
 
         fConfig
                 .setParameter(
@@ -143,9 +145,9 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         group = mgd.getModelGroup();
 
         annotation = group.getAnnotation();
-        assertNotNull("TEST2_SYNTH_ANNOTATION", annotation);
+        assertNotNull(annotation, "TEST2_SYNTH_ANNOTATION");
         annotations = group.getAnnotations();
-        assertEquals("TEST2_SYNTH_ANNOTATIONS", 1, annotations.getLength());
+        assertEquals(1, annotations.getLength(), "TEST2_SYNTH_ANNOTATIONS");
     }
 
     /**
@@ -172,15 +174,16 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = (XSModelGroup) choiceparticle.getTerm();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST3_NO_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST3_NO_ANNOTATION_" + synth);
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST3_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST3_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST3_NO_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST3_NO_ANNOTATIONS_" + synth);
     }
 
     public void testGroup3Annotation() {
@@ -210,15 +213,16 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = mgd.getModelGroup();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST4_NO_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST4_NO_ANNOTATION_" + synth);
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST4_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST4_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST4_NO_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST4_NO_ANNOTATIONS_" + synth);
     }
 
     public void testGroup4Annotation() {
@@ -251,28 +255,30 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = mgd.getModelGroup();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST5.1_NO_ANNOTATION_" + synth, expected1,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected1,
+                trim(annotation.getAnnotationString()), "TEST5.1_NO_ANNOTATION_" + synth);
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST5.1_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST5.1_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST5.1_NO_ANNOTATIONS_" + synth,
                 expected1,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST5.1_NO_ANNOTATIONS_" + synth);
 
         group = (XSModelGroup) ((XSParticle) group.getParticles().item(0))
                 .getTerm();
         annotation = group.getAnnotation();
-        assertEquals("TEST5.2_NO_ANNOTATION_" + synth, expected2,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected2,
+                trim(annotation.getAnnotationString()), "TEST5.2_NO_ANNOTATION_" + synth);
         annotations = group.getAnnotations();
-        assertEquals("TEST5.2_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST5.2_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST5.2_NO_ANNOTATIONS_" + synth,
                 expected2,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST5.2_NO_ANNOTATIONS_" + synth);
 
     }
 
@@ -311,41 +317,44 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = mgd.getModelGroup();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST6.1_NO_ANNOTATION_" + synth, expected1,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected1,
+                trim(annotation.getAnnotationString()), "TEST6.1_NO_ANNOTATION_" + synth);
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST6.1_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST6.1_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST6.1_NO_ANNOTATIONS_" + synth,
                 expected1,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6.1_NO_ANNOTATIONS_" + synth);
 
         group = (XSModelGroup) ((XSParticle) group.getParticles().item(0))
                 .getTerm();
         annotation = group.getAnnotation();
-        assertEquals("TEST6.2_NO_ANNOTATION_" + synth, expected2,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected2,
+                trim(annotation.getAnnotationString()), "TEST6.2_NO_ANNOTATION_" + synth);
         annotations = group.getAnnotations();
-        assertEquals("TEST6.2_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST6.2_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST6.2_NO_ANNOTATIONS_" + synth,
                 expected2,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6.2_NO_ANNOTATIONS_" + synth);
 
         group = (XSModelGroup) ((XSParticle) group.getParticles().item(0))
                 .getTerm();
         annotation = group.getAnnotation();
-        assertEquals("TEST6.3_NO_ANNOTATION_" + synth, expected3,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected3,
+                trim(annotation.getAnnotationString()), "TEST6.3_NO_ANNOTATION_" + synth);
         annotations = group.getAnnotations();
-        assertEquals("TEST6.3_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST6.3_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST6.3_NO_ANNOTATIONS_" + synth,
                 expected3,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6.3_NO_ANNOTATIONS_" + synth);
 
     }
 
@@ -380,28 +389,29 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = mgd.getModelGroup();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST7.1_ANNOTATION_" + synth, expected1,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected1,
+                trim(annotation.getAnnotationString()), "TEST7.1_ANNOTATION_" + synth);
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST7.1_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST7.1_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST7.1_ANNOTATIONS_" + synth,
                 expected1,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7.1_ANNOTATIONS_" + synth);
 
         if (synth == Boolean.TRUE) {
             group = (XSModelGroup) ((XSParticle) group.getParticles().item(0))
                     .getTerm();
             annotation = group.getAnnotation();
-            assertEquals("TEST7.2_ANNOTATION_" + synth, expected2,
-                    trim(annotation.getAnnotationString()));
+            assertEquals(expected2,
+                    trim(annotation.getAnnotationString()), "TEST7.2_ANNOTATION_" + synth);
             annotations = group.getAnnotations();
-            assertEquals("TEST7.2_ANNOTATIONS_" + synth, 1, annotations
-                    .getLength());
-            assertEquals("TEST7.2_ANNOTATIONS_" + synth, expected2,
+            assertEquals(1, annotations
+                    .getLength(), "TEST7.2_ANNOTATIONS_" + synth);
+            assertEquals(expected2,
                     trim(((XSAnnotation) annotations.item(0))
-                            .getAnnotationString()));
+                            .getAnnotationString()), "TEST7.2_ANNOTATIONS_" + synth);
         }
     }
 
@@ -433,15 +443,16 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = (XSModelGroup) particle.getTerm();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST8_NO_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST8_NO_ANNOTATION_" + synth);
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST8_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST8_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST8_NO_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST8_NO_ANNOTATIONS_" + synth);
     }
 
     public void testGroup8Annotation() {
@@ -472,15 +483,16 @@ public class XSModelGroupAnnotationsTest extends TestCase {
         XSModelGroup group = (XSModelGroup) particle.getTerm();
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST9_NO_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST9_NO_ANNOTATION_" + synth);
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST9_NO_ANNOTATIONS_" + synth, 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST9_NO_ANNOTATIONS_" + synth);
         assertEquals(
-                "TEST9_NO_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST9_NO_ANNOTATIONS_" + synth);
     }
 
     public void testGroup9Annotation() {
@@ -504,23 +516,20 @@ public class XSModelGroupAnnotationsTest extends TestCase {
 
         XSAnnotation annotation = modelGroup.getAnnotation();
         XSObjectList annotations = modelGroup.getAnnotations();
-        assertNull("TEST10_NO_ANNOTATIONS_CT4", annotation);
-        assertEquals("TEST10_NO_ANNOTATIONS_CT4", annotations.getLength(), 0);
+        assertNull(annotation, "TEST10_NO_ANNOTATIONS_CT4");
+        assertEquals(annotations.getLength(), 0, "TEST10_NO_ANNOTATIONS_CT4");
 
         type = (XSComplexTypeDefinition) model.getTypeDefinition("CT5",
                 "XSModelGroup");
         annotation = modelGroup.getAnnotation();
         annotations = modelGroup.getAnnotations();
-        assertNull("TEST10_NO_ANNOTATIONS_CT5", annotation);
-        assertEquals("TEST10_NO_ANNOTATIONS_CT5", annotations.getLength(), 0);
+        assertNull(annotation, "TEST10_NO_ANNOTATIONS_CT5");
+        assertEquals(annotations.getLength(), 0, "TEST10_NO_ANNOTATIONS_CT5");
 
         XSParticle part = (XSParticle) type.getParticle();
-        assertEquals("TEST10_NO_ANNOTATIONS_CT5", expected,
+        assertEquals(expected,
                 trim(((XSAnnotation) part.getAnnotations().item(0))
-                        .getAnnotationString()));
+                        .getAnnotationString()), "TEST10_NO_ANNOTATIONS_CT5");
     } **/
     
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(XSModelGroupAnnotationsTest.class);
-    }
 }

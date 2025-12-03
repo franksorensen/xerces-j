@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSImplementation;
 import org.apache.xerces.xs.XSLoader;
@@ -100,9 +102,9 @@ public class XSModelGroupDefinitionAnnotationsTest extends TestCase {
                 "XSModelGroupDefn");
 
         XSAnnotation annotation = group.getAnnotation();
-        assertNull("TEST1_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST1_NO_ANNOTATION");
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST1_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST1_NO_ANNOTATIONS");
     }
 
     /**
@@ -120,9 +122,9 @@ public class XSModelGroupDefinitionAnnotationsTest extends TestCase {
                 "XSModelGroupDefn");
 
         XSAnnotation annotation = group.getAnnotation();
-        assertNull("TEST2_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST2_NO_ANNOTATION");
         XSObjectList annotations = group.getAnnotations();
-        assertEquals("TEST2_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST2_NO_ANNOTATIONS");
     }
 
     /**
@@ -146,13 +148,13 @@ public class XSModelGroupDefinitionAnnotationsTest extends TestCase {
                 "XSModelGroupDefn");
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST3_ANNOTATION", expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST3_ANNOTATION");
         XSObjectList annotations = group.getAnnotations();
         assertEquals(
-                "TEST3_ANNOTATIONS",
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+                "TEST3_ANNOTATIONS");
     }
 
     /**
@@ -174,13 +176,14 @@ public class XSModelGroupDefinitionAnnotationsTest extends TestCase {
                 "XSModelGroupDefn");
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST3_ANNOTATION", expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST3_ANNOTATION");
         XSObjectList annotations = group.getAnnotations();
         assertEquals(
-                "TEST3_ANNOTATIONS",
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST3_ANNOTATIONS");
     }
 
     /**
@@ -202,17 +205,13 @@ public class XSModelGroupDefinitionAnnotationsTest extends TestCase {
                 "XSModelGroupDefn");
 
         XSAnnotation annotation = group.getAnnotation();
-        assertEquals("TEST4_NO_SYNTH_ANNOTATION", expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST4_NO_SYNTH_ANNOTATION");
         XSObjectList annotations = group.getAnnotations();
         assertEquals(
-                "TEST4_NO_SYNTH_ANNOTATIONS",
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+                "TEST4_NO_SYNTH_ANNOTATIONS");
     }
 
-    public static void main(String args[]) {
-        junit.textui.TestRunner
-                .run(XSModelGroupDefinitionAnnotationsTest.class);
-    }
 }

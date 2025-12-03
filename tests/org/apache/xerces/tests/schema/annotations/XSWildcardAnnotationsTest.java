@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSAttributeGroupDefinition;
 import org.apache.xerces.xs.XSComplexTypeDefinition;
@@ -108,10 +110,10 @@ public class XSWildcardAnnotationsTest extends TestCase {
                 .getAttributeWildcard();
 
         XSAnnotation annotation = attrWC.getAnnotation();
-        assertNull("TEST1_ATTRWC_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST1_ATTRWC_NO_ANNOTATION");
 
         XSObjectList annotations = attrWC.getAnnotations();
-        assertEquals("TEST1_ATTRWC_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST1_ATTRWC_NO_ANNOTATIONS");
 
         fConfig
                 .setParameter(
@@ -126,11 +128,11 @@ public class XSWildcardAnnotationsTest extends TestCase {
                 .getAttributeWildcard();
 
         annotation = attrWC.getAnnotation();
-        assertNotNull("TEST1_ATTRWC_SYNTH_ANNOTATION", annotation);
+        assertNotNull(annotation, "TEST1_ATTRWC_SYNTH_ANNOTATION");
 
         annotations = attrWC.getAnnotations();
-        assertEquals("TEST1_ATTRWC_SYNTHO_ANNOTATIONS", 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST1_ATTRWC_SYNTHO_ANNOTATIONS");
     }
 
     /**
@@ -168,14 +170,15 @@ public class XSWildcardAnnotationsTest extends TestCase {
                 .getAttributeWildcard();
 
         XSAnnotation annotation = attrWC.getAnnotation();
-        assertEquals("TEST2_ATTRWC_ANNOTATION_" + synthetic, expected,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected,
+                trim(annotation.getAnnotationString()), "TEST2_ATTRWC_ANNOTATION_" + synthetic);
 
         XSObjectList annotations = attrWC.getAnnotations();
         assertEquals(
-                "TEST2_ATTRWC_ANNOTATIONS_" + synthetic,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST2_ATTRWC_ANNOTATIONS_" + synthetic);
     }
 
     /**
@@ -200,14 +203,15 @@ public class XSWildcardAnnotationsTest extends TestCase {
         XSWildcard attrWC = attgp.getAttributeWildcard();
 
         XSAnnotation annotation = attrWC.getAnnotation();
-        assertEquals("TEST3_ATTRWC_ANNOTATION_" + synthetic, expected,
-                trim(annotation.getAnnotationString()));
+        assertEquals(expected,
+                trim(annotation.getAnnotationString()), "TEST3_ATTRWC_ANNOTATION_" + synthetic);
 
         XSObjectList annotations = attrWC.getAnnotations();
         assertEquals(
-                "TEST3_ATTRWC_ANNOTATIONS_" + synthetic,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST3_ATTRWC_ANNOTATIONS_" + synthetic);
     }
 
     /**
@@ -231,10 +235,10 @@ public class XSWildcardAnnotationsTest extends TestCase {
         XSWildcard elemWC = (XSWildcard) anyPart.getTerm();
 
         XSAnnotation annotation = elemWC.getAnnotation();
-        assertNull("TEST4_ELEMWC_NO_ANNOTATION", annotation);
+        assertNull(annotation, "TEST4_ELEMWC_NO_ANNOTATION");
 
         XSObjectList annotations = elemWC.getAnnotations();
-        assertEquals("TEST4_ELEMWC_NO_ANNOTATIONS", 0, annotations.getLength());
+        assertEquals(0, annotations.getLength(), "TEST4_ELEMWC_NO_ANNOTATIONS");
     }
 
     /**
@@ -258,11 +262,11 @@ public class XSWildcardAnnotationsTest extends TestCase {
         XSWildcard elemWC = (XSWildcard) anyPart.getTerm();
 
         XSAnnotation annotation = elemWC.getAnnotation();
-        assertNotNull("TEST5_ELEMWC_SYNTH_ANNOTATION", annotation);
+        assertNotNull(annotation, "TEST5_ELEMWC_SYNTH_ANNOTATION");
 
         XSObjectList annotations = elemWC.getAnnotations();
-        assertEquals("TEST5_ELEMWC_SYNTH_ANNOTATIONS", 1, annotations
-                .getLength());
+        assertEquals(1, annotations
+                .getLength(), "TEST5_ELEMWC_SYNTH_ANNOTATIONS");
     }
 
     /**
@@ -290,14 +294,15 @@ public class XSWildcardAnnotationsTest extends TestCase {
         XSWildcard elemWC = (XSWildcard) anyPart.getTerm();
 
         XSAnnotation annotation = elemWC.getAnnotation();
-        assertEquals("TEST6_ELEMWC_ANNOTATION", expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST6_ELEMWC_ANNOTATION");
 
         XSObjectList annotations = elemWC.getAnnotations();
         assertEquals(
-                "TEST6_ELEMWC_ANNOTATIONS",
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST6_ELEMWC_ANNOTATIONS");
     }
 
     /**
@@ -327,17 +332,15 @@ public class XSWildcardAnnotationsTest extends TestCase {
         XSWildcard elemWC = (XSWildcard) anyPart.getTerm();
 
         XSAnnotation annotation = elemWC.getAnnotation();
-        assertEquals("TEST7_ELEMWC_ANNOTATION", expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST7_ELEMWC_ANNOTATION");
 
         XSObjectList annotations = elemWC.getAnnotations();
         assertEquals(
-                "TEST7_ELEMWC_ANNOTATIONS",
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST7_ELEMWC_ANNOTATIONS");
     }
 
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(XSWildcardAnnotationsTest.class);
-    }
 }

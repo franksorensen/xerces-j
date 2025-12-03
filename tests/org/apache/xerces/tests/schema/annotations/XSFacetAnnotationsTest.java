@@ -17,6 +17,8 @@
 
 package org.apache.xerces.tests.schema.annotations;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.apache.xerces.xs.XSAnnotation;
 import org.apache.xerces.xs.XSAttributeDeclaration;
 import org.apache.xerces.xs.XSAttributeUse;
@@ -112,10 +114,10 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet length = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = length.getAnnotation();
-        assertNull("TEST1_NO_ANNOTATION_" + synth, annotation);
+        assertNull(annotation, "TEST1_NO_ANNOTATION_" + synth);
         XSObjectList annotations = length.getAnnotations();
-        assertEquals("TEST1_NO_ANNOTATIONS_" + synth, 0, annotations
-                .getLength());
+        assertEquals(0, annotations
+                .getLength(), "TEST1_NO_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -150,23 +152,25 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet minLength = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = minLength.getAnnotation();
-        assertEquals("TEST2_NO_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST2_NO_ANNOTATION_" + synth);
         XSObjectList annotations = minLength.getAnnotations();
         assertEquals(
-                "TEST2_NO_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST2_NO_ANNOTATIONS_" + synth);
 
         XSFacet maxLength = (XSFacet) st.getFacets().item(2);
         annotation = maxLength.getAnnotation();
-        assertEquals("TEST2_NO_ANNOTATION_" + synth, expected2, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected2, trim(annotation
+                .getAnnotationString()), "TEST2_NO_ANNOTATION_" + synth);
         annotations = maxLength.getAnnotations();
         assertEquals(
-                "TEST2_NO_ANNOTATIONS_" + synth,
                 expected2,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TEST2_NO_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -196,13 +200,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet whitespace = (XSFacet) st.getFacets().item(0);
 
         XSAnnotation annotation = whitespace.getAnnotation();
-        assertEquals("TEST3_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST3_ANNOTATION_" + synth);
         XSObjectList annotations = whitespace.getAnnotations();
         assertEquals(
-                "TES3_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES3_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -233,13 +238,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet minInclusive = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = minInclusive.getAnnotation();
-        assertEquals("TEST4_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST4_ANNOTATION_" + synth);
         XSObjectList annotations = minInclusive.getAnnotations();
         assertEquals(
-                "TES4_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES4_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -270,13 +276,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet maxInclusive = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = maxInclusive.getAnnotation();
-        assertEquals("TEST5_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST5_ANNOTATION_" + synth);
         XSObjectList annotations = maxInclusive.getAnnotations();
         assertEquals(
-                "TES5_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES5_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -307,13 +314,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet fractionDigits = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = fractionDigits.getAnnotation();
-        assertEquals("TEST6_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST6_ANNOTATION_" + synth);
         XSObjectList annotations = fractionDigits.getAnnotations();
         assertEquals(
-                "TES6_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES6_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -347,13 +355,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet fractionDigits = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = fractionDigits.getAnnotation();
-        assertEquals("TEST7_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST7_ANNOTATION_" + synth);
         XSObjectList annotations = fractionDigits.getAnnotations();
         assertEquals(
-                "TES7_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES7_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -387,13 +396,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet fractionDigits = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = fractionDigits.getAnnotation();
-        assertEquals("TEST8_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST8_ANNOTATION_" + synth);
         XSObjectList annotations = fractionDigits.getAnnotations();
         assertEquals(
-                "TES8_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES8_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -427,13 +437,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet fractionDigits = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = fractionDigits.getAnnotation();
-        assertEquals("TEST9_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST9_ANNOTATION_" + synth);
         XSObjectList annotations = fractionDigits.getAnnotations();
         assertEquals(
-                "TES79_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES79_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -470,13 +481,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet fractionDigits = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = fractionDigits.getAnnotation();
-        assertEquals("TEST10_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST10_ANNOTATION_" + synth);
         XSObjectList annotations = fractionDigits.getAnnotations();
         assertEquals(
-                "TES10_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES10_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -507,13 +519,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet maxInclusive = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = maxInclusive.getAnnotation();
-        assertEquals("TEST11_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST11_ANNOTATION_" + synth);
         XSObjectList annotations = maxInclusive.getAnnotations();
         assertEquals(
-                "TES11_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES11_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -544,13 +557,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet length = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = length.getAnnotation();
-        assertEquals("TEST12_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST12_ANNOTATION_" + synth);
         XSObjectList annotations = length.getAnnotations();
         assertEquals(
-                "TES12_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES12_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -583,13 +597,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet length = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = length.getAnnotation();
-        assertEquals("TEST12_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST12_ANNOTATION_" + synth);
         XSObjectList annotations = length.getAnnotations();
         assertEquals(
-                "TES13_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES13_ANNOTATIONS_" + synth);
     }
 
     /**
@@ -626,25 +641,26 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet minLength = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = minLength.getAnnotation();
-        assertEquals("TEST14_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST14_ANNOTATION_" + synth);
         XSObjectList annotations = minLength.getAnnotations();
         assertEquals(
-                "TES14_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES14_ANNOTATIONS_" + synth);
 
         if (synth.booleanValue() == true) {
             // Item 0 is minInclusive
             XSFacet maxLength = (XSFacet) st.getFacets().item(2);
 
             annotation = maxLength.getAnnotation();
-            assertEquals("TEST14_ANNOTATION_" + synth, expected1,
-                    trim(annotation.getAnnotationString()));
+            assertEquals(expected1,
+                    trim(annotation.getAnnotationString()), "TEST14_ANNOTATION_" + synth);
             annotations = maxLength.getAnnotations();
-            assertEquals("TES14_ANNOTATIONS_" + synth, expected1,
+            assertEquals(expected1,
                     trim(((XSAnnotation) annotations.item(0))
-                            .getAnnotationString()));
+                            .getAnnotationString()), "TES14_ANNOTATIONS_" + synth);
         }
     }
 
@@ -679,18 +695,18 @@ public class XSFacetAnnotationsTest extends TestCase {
 
         if (synth.booleanValue() == true) {
             XSAnnotation annotation = maxLength.getAnnotation();
-            assertEquals("TEST15_ANNOTATION_" + synth, expected,
-                    trim(annotation.getAnnotationString()));
+            assertEquals(expected,
+                    trim(annotation.getAnnotationString()), "TEST15_ANNOTATION_" + synth);
             XSObjectList annotations = maxLength.getAnnotations();
-            assertEquals("TES15_ANNOTATIONS_" + synth, expected,
+            assertEquals(expected,
                     trim(((XSAnnotation) annotations.item(0))
-                            .getAnnotationString()));
+                            .getAnnotationString()), "TES15_ANNOTATIONS_" + synth);
         } else {
             XSAnnotation annotation = maxLength.getAnnotation();
-            assertNull("TEST15_ANNOTATION_" + synth, annotation);
+            assertNull(annotation, "TEST15_ANNOTATION_" + synth);
             XSObjectList annotations = maxLength.getAnnotations();
-            assertEquals("TES15_ANNOTATIONS_" + synth, 0, annotations
-                    .getLength());
+            assertEquals(0, annotations
+                    .getLength(), "TES15_ANNOTATIONS_" + synth);
         }
     }
 
@@ -726,21 +742,14 @@ public class XSFacetAnnotationsTest extends TestCase {
         XSFacet maxLength = (XSFacet) st.getFacets().item(1);
 
         XSAnnotation annotation = maxLength.getAnnotation();
-        assertEquals("TEST16_ANNOTATION_" + synth, expected, trim(annotation
-                .getAnnotationString()));
+        assertEquals(expected, trim(annotation
+                .getAnnotationString()), "TEST16_ANNOTATION_" + synth);
         XSObjectList annotations = maxLength.getAnnotations();
         assertEquals(
-                "TES16_ANNOTATIONS_" + synth,
                 expected,
-                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()));
-    }
-
-    /**
-     * 
-     * @param args
-     */
-    public static void main(String args[]) {
-        junit.textui.TestRunner.run(XSFacetAnnotationsTest.class);
+                trim(((XSAnnotation) annotations.item(0)).getAnnotationString()),
+				
+                "TES16_ANNOTATIONS_" + synth);
     }
 
 }
