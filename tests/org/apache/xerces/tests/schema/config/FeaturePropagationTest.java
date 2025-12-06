@@ -47,8 +47,8 @@ public class FeaturePropagationTest {
     
     protected String name;
     
-    public FeaturePropagationTest(String name) {
-        this.name = name;
+    public FeaturePropagationTest() {
+        
     }
     
 	@Test
@@ -174,7 +174,7 @@ public class FeaturePropagationTest {
         String packageDir = this.getClass().getPackage().getName().replace('.',
             File.separatorChar);
         String schemaPath = packageDir + File.separatorChar + xsd;
-        URL schemaURL = ClassLoader.getSystemResource(schemaPath);
+        URL schemaURL = getClass().getResource("/" + schemaPath);
         if (schemaURL == null) {
             throw new FileNotFoundException("Couldn't find schema file: " + schemaPath);
         }

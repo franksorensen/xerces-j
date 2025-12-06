@@ -44,8 +44,7 @@ public class UnparsedEntityCheckingTest extends BaseTest {
         return new String[] { UNDECLARED_ENTITY };
     }
     
-    public UnparsedEntityCheckingTest(String name) {
-        super(name);
+    public UnparsedEntityCheckingTest() {
     }
     
 	@Test

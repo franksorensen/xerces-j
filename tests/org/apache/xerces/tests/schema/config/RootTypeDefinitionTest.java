@@ -60,8 +60,7 @@ public class RootTypeDefinitionTest extends BaseTest {
         return new String[] { UNKNOWN_TYPE_ERROR, INVALID_DERIVATION_ERROR };
     }
     
-    public RootTypeDefinitionTest(String name) {
-        super(name);
+    public RootTypeDefinitionTest() {
         unknownType = new QName("W");
         typeX = new QName("X");
         typeY = new QName("Y");

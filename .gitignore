@@ -7,3 +7,5 @@ out.xml
 .DS_Store
 
 /lib/
+/dist/
+/build-test/

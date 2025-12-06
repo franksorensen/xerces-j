@@ -18,6 +18,9 @@
 package org.apache.xerces.tests.schema.config;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
@@ -41,14 +44,17 @@ public class FixedAttrTest extends BaseTest {
         return "base.xsd";
     }
     
-    public FixedAttrTest(String name) {
-        super(name);
+    public FixedAttrTest() {
     }
-    
+
+    @Override
+    @BeforeEach    
     protected void setUp() throws Exception {
         super.setUp();
     }
     
+    @Override
+    @AfterEach    
     protected void tearDown() throws Exception {
         super.tearDown();
     }

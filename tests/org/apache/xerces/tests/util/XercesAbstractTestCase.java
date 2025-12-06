@@ -17,8 +17,8 @@
 
 package org.apache.xerces.tests.util;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -50,16 +50,14 @@ public class XercesAbstractTestCase implements ErrorHandler {
 	protected List warningList = null; 
 	
 	protected boolean checkOnlyWarnings = false; 
-	protected String name;
 	
 	protected static final String DEFAULT_SCHEMA_LANGUAGE = XMLConstants.W3C_XML_SCHEMA_NS_URI;
 	protected static final String SCHEMA_FULL_CHECKING_FEATURE_ID = "http://apache.org/xml/features/validation/schema-full-checking";	
 	
-	public XercesAbstractTestCase(String name) {
-		this.name = name;
+	public XercesAbstractTestCase() {
 	}
 
-	@BeforeAll
+	@BeforeEach
 	protected void setUp() throws Exception {		
 		fSchemaFactory = SchemaFactory.newInstance(DEFAULT_SCHEMA_LANGUAGE);
 		fSchemaFactory.setFeature(SCHEMA_FULL_CHECKING_FEATURE_ID, true);
@@ -67,7 +65,7 @@ public class XercesAbstractTestCase implements ErrorHandler {
 		warningList = new ArrayList(); 
 	}
 
-	@AfterAll
+	@AfterEach
 	protected void tearDown() throws Exception {
 		fErrSysId = null;
 		fFatErrSysId = null;

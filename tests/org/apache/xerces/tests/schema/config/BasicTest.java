@@ -38,12 +38,8 @@ public class BasicTest extends BaseTest {
     }
     
     public BasicTest() {
-        super("");
     }
     
-    public BasicTest(String name) {
-        super(name);
-    }
     
 	@Test
     public void testSimpleValidation() {

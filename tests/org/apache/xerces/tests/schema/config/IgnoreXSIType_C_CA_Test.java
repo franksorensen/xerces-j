@@ -38,8 +38,7 @@ public class IgnoreXSIType_C_CA_Test extends BaseTest {
         return "base.xsd";
     }
     
-    public IgnoreXSIType_C_CA_Test(String name) {
-        super(name);
+    public IgnoreXSIType_C_CA_Test() {
     }
     
 	@Test

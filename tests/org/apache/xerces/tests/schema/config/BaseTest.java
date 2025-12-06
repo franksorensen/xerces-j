@@ -86,10 +86,8 @@ public abstract class BaseTest {
     
     protected abstract String getXMLDocument();
     
-    protected String name;
     
-    public BaseTest(String name) {
-        this.name = name;
+    public BaseTest() {
         fErrorHandler = new SpecialCaseErrorHandler(getRelevantErrorIDs());
     }
     
@@ -106,7 +104,7 @@ public abstract class BaseTest {
         String packageDir = this.getClass().getPackage().getName().replace('.',
                 File.separatorChar);
         String documentPath = packageDir + "/" + getXMLDocument();
-        fDocumentURL = ClassLoader.getSystemResource(documentPath);
+        fDocumentURL = getClass().getResource("/" + documentPath);
         if (fDocumentURL == null) {
             throw new FileNotFoundException("Couldn't find xml file for test: " + documentPath);
         }
@@ -116,13 +114,7 @@ public abstract class BaseTest {
         .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         sf.setFeature(USE_GRAMMAR_POOL_ONLY, getUseGrammarPoolOnly());
         String schemaPath = packageDir + "/" + getSchemaFile();
-        fSchemaURL = ClassLoader.getSystemResource(schemaPath);
-        
-        if (fSchemaURL == null) {
-            File file = new File("tests/" + schemaPath);
-            if (file.exists())
-                fSchemaURL = file.toURI().toURL();
-        }
+        fSchemaURL = getClass().getResource("/" + schemaPath);
         
         if (fSchemaURL == null) {
             throw new FileNotFoundException("Couldn't find schema file for test: " + schemaPath);

@@ -89,7 +89,7 @@ public class JAXPSpecTest extends DefaultHandler {
         saxParser.setProperty(
         "http://java.sun.com/xml/jaxp/properties/schemaLanguage",
         "http://www.w3.org/2001/XMLSchema");
-        saxParser.parse("tests/jaxp/data/personal-schema.xml",this);
+        saxParser.parse("tests/org/apache/xerces/tests/jaxp/data/personal-schema.xml",this);
         System.out.println(" JAXPSpecTest.testSchemaLanguageSAX Passed ");
     }
     
@@ -108,7 +108,7 @@ public class JAXPSpecTest extends DefaultHandler {
             //setting this property should throw SAXNotSupportedException
             saxParser.setProperty(
             "http://java.sun.com/xml/jaxp/properties/schemaSource",
-            "tests/jaxp/data/personal-schema.xsd");
+            "tests/org/apache/xerces/tests/jaxp/data/personal-schema.xsd");
             saxParser.parse("tests/jaxp/data/personal-schema.xml",this);
         }catch(SAXNotSupportedException ne){
             System.out.println(" JAXPSpecTest.testSchemaSourceSAX Passed");
@@ -131,7 +131,7 @@ public class JAXPSpecTest extends DefaultHandler {
         DocumentBuilder docBuilder = dbf.newDocumentBuilder();
         docBuilder.setErrorHandler(this);
         Document document = docBuilder.parse(
-        new File("tests/jaxp/data/personal-schema.xml"));
+        new File("tests/org/apache/xerces/tests/jaxp/data/personal-schema.xml"));
         System.out.println(" JAXPSpecTest.testSchemaLanguageDOM Passed");
         
     }
@@ -150,7 +150,7 @@ public class JAXPSpecTest extends DefaultHandler {
             //setting this property should throw IllegalArgumentException
             dbf.setAttribute(
             "http://java.sun.com/xml/jaxp/properties/schemaSource",
-            "tests/jaxp/data/personal-schema.xsd");
+            "tests/org/apache/xerces/tests/jaxp/data/personal-schema.xsd");
             DocumentBuilder docBuilder = dbf.newDocumentBuilder();
             docBuilder.setErrorHandler(this);
             Document document = docBuilder.parse(

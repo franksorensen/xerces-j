@@ -37,8 +37,7 @@ import org.apache.xerces.tests.util.XercesAbstractTestCase;
  */
 public class IDConstraintTests extends XercesAbstractTestCase {
     
-    public IDConstraintTests(String name) {
-        super(name);
+    public IDConstraintTests() {
     }
     
     @Test

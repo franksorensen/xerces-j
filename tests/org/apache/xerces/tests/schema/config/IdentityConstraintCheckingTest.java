@@ -50,8 +50,7 @@ public class IdentityConstraintCheckingTest extends BaseTest {
         return new String[] { DUPLICATE_UNIQUE, DUPLICATE_KEY, INVALID_KEYREF };
     }
     
-    public IdentityConstraintCheckingTest(String name) {
-        super(name);
+    public IdentityConstraintCheckingTest() {
     }
     
 	@Test

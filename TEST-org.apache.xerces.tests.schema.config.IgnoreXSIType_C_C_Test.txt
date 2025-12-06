@@ -1,0 +1,13 @@
+Testcase: org.apache.xerces.tests.schema.config.IgnoreXSIType_C_C_Test
+Test: testSetTrueDocument() took 279 milli sec(s) FAILED: {validity} was <partial> but it should have been <none> ==> expected: <0> but was: <1>
+org.opentest4j.AssertionFailedError: {validity} was <partial> but it should have been <none> ==> expected: <0> but was: <1>
+	at org.junit.jupiter.api@6.0.1/org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at org.junit.jupiter.api@6.0.1/org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:139)
+	at org.junit.jupiter.api@6.0.1/org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:201)
+	at org.junit.jupiter.api@6.0.1/org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:136)
+	at org.junit.jupiter.api@6.0.1/org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:384)
+	at xercesImpl/org.apache.xerces.tests.schema.config.BaseTest.assertValidationAttempted(BaseTest.java:203)
+	at xercesImpl/org.apache.xerces.tests.schema.config.IgnoreXSIType_C_C_Test.checkTrueResult(IgnoreXSIType_C_C_Test.java:138)
+	at xercesImpl/org.apache.xerces.tests.schema.config.IgnoreXSIType_C_C_Test.testSetTrueDocument(IgnoreXSIType_C_C_Test.java:116)
+
+Tests run: 1, Failures: 1, Skipped: 0, Aborted: 0, Time elapsed: 305 milli sec(s)

@@ -6,6 +6,8 @@
 	<property name="dist.home"     	    value="${basedir}/dist" />
 	<property name="lib.home"     		value="${basedir}/lib" />
 	<property name="src.home"      	    value="${basedir}/src" />
+	<property name="samples.home"      	value="${basedir}/samples" />
+	<property name="tests.home"      	value="${basedir}/tests" />
 	<property name="package.version"    value="2.12.3-jpms" />
 	<property name="package.name"   	value="${ant.project.name}" />
 
@@ -13,6 +15,19 @@
 	<property name="compile.deprecation" value="false"/>
 	<property name="compile.optimize" value="true"/>
 
+	<path id="junit.platform.libs.classpath">
+        <fileset dir="${lib.home}">
+        	<include name="junit-platform-*" />
+        	<include name="opentest4j-*" />
+        </fileset>
+    </path>
+
+    <path id="junit.engine.jupiter.classpath">
+        <fileset dir="${lib.home}">
+        	<include name="junit-jupiter-*" />
+        </fileset>
+    </path>	
+	
 	<target name="ivyresolve" description="">
 		<property file="${basedir}/../ivysetup/ivyproperties.properties" />
 		<ivy:settings file="${basedir}/../ivysetup/ivysettings.xml" />
@@ -34,7 +49,17 @@
 	</target>	
 
 	<target name="compile" depends="prepare" description="Compile Java sources">
-		<javac srcdir="${src.home}"
+		<antcall target="compile-javac" />
+	</target>
+
+	<target name="compile-test" depends="prepare-test" description="Compile Java sources for tests">
+		<antcall target="compile-javac">
+			<param name="build.home" value="${build.home}-test"/>
+		</antcall>
+	</target>
+
+	<target name="compile-javac">
+		<javac srcdir="${build.home}"
     	      destdir="${build.home}"
     	        debug="${compile.debug}"
     	  deprecation="${compile.deprecation}"
@@ -50,14 +75,83 @@
 				</fileset>
 			</modulepath>	
 		</javac>
-
-		
 	</target>
 
+	
+    <target name="test.junit.launcher" depends="compile-test">
+    	<mkdir dir="${build.home}-test/test-report" />
+
+    	<delete>
+    		<fileset dir="${build.home}-test/test-report">
+    		</fileset>
+    	</delete>
+    	
+        <junitlauncher haltOnFailure="true" printSummary="true">
+            <classpath refid="junit.platform.libs.classpath"/>
+            <classpath refid="junit.engine.jupiter.classpath"/>			
+        	
+        	
+            <testclasses outputdir="${build.home}-test/test-report">
+            	<fork>
+            		<modulepath>
+            			<pathelement path="${build.home}-test" />
+            			<pathelement path="${lib.home}" />
+            		</modulepath>
+            	</fork>
+
+            	
+                <fileset dir="${build.home}-test">
+                	<include name="**/*Test*.class" />
+                </fileset>
+                <listener type="legacy-xml" sendSysOut="true" sendSysErr="true"/>
+                <listener type="legacy-plain" sendSysOut="true" />
+            </testclasses>
+        </junitlauncher>
+    </target>
+
+    <!-- https://docs.junit.org/current/user-guide/#running-tests-console-launcher -->
+
+	
+    <target name="test.console.launcher" depends="compile-test">
+    	
+        <java module="org.junit.platform.console" fork="true" failonerror="true">
+    		<modulepath>
+    			<pathelement path="${build.home}-test" />
+    			<pathelement path="${lib.home}" />
+    		</modulepath>
+            <arg value="execute"/>
+        	<arg line="--reports-dir ${build.home}-test/test-report"/>
+        	<arg value="--disable-ansi-colors"/>
+        	<arg value="--disable-banner"/>
+        	<arg value="--select-module"/>
+        	<arg value="${package.name}"/>
+        </java>
+        <junitreport todir="${build.home}-test/test-report">
+            <fileset dir="${build.home}-test/test-report">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${build.home}-test/test-report/html"/>
+        </junitreport>
+    </target>
+
+    <target name="test" description="Run unit tests">
+    	
+    	<mkdir dir="${build.home}-test/test-report" />
+
+    	<delete>
+    		<fileset dir="${build.home}-test/test-report">
+    		</fileset>
+    	</delete>
+    	
+    	<antcall target="test.console.launcher"></antcall>
+    	
+    </target>
+	
 
 	<target name="dist" depends="compile"
 	        description="Create the distribution files and directories" >
-		<jar jarfile="${dist.home}/${package.name}-${package.version}.jar" basedir="${build.home}" >
+		<jar jarfile="${dist.home}/${package.name}-${package.version}.jar" 
+			basedir="${build.home}" excludes="**/*.java">
 			<manifest>
 				<attribute name="Built-By" value="${user.name}" />
 			</manifest>
@@ -71,15 +165,40 @@
 		
 		<copy  todir="${build.home}">
 			<fileset dir="${src.home}">
-				<exclude name="**/*.java" />
 			</fileset>
-		</copy>				
+		</copy>			
 		
+		<loadfile property="moduleInfoNoTests" srcfile="${build.home}/module-info.java">
+			<filterchain>
+				<filterreader classname="org.apache.tools.ant.filters.LineContains">
+					<param type="contains" value="junit"/>
+					<param type="negate" value="true"/>
+				</filterreader>
+			</filterchain>
+		</loadfile>
+		
+		<echo file="${build.home}/module-info.java">${moduleInfoNoTests}</echo>
 		
 	</target>
 
+	<target name="prepare-test" description="">
+		<mkdir dir="${build.home}-test" />
+		
+		<copy  todir="${build.home}-test">
+			<fileset dir="${src.home}">
+			</fileset>
+			<fileset dir="${samples.home}">
+			</fileset>
+			<fileset dir="${tests.home}">
+			</fileset>
+		</copy>				
+		
+	</target>
+	
+	
 	<target name="clean" description="Delete old build and dist directories">
 		<delete dir="${build.home}" />
+		<delete dir="${build.home}-test" />
 		<delete dir="${dist.home}" />
 	</target>
 	

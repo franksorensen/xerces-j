@@ -35,10 +35,12 @@ public class SurrogatePairLengthTest extends BaseTest {
     
     private static final String LENGTH_ERROR = "cvc-length-valid";
     
+    @Override
     protected String getXMLDocument() {
         return "surrogate.xml";
     }
     
+    @Override
     protected String getSchemaFile() {
         return "surrogate.xsd";
     }
@@ -47,8 +49,7 @@ public class SurrogatePairLengthTest extends BaseTest {
         return new String[] { LENGTH_ERROR };
     }
     
-    public SurrogatePairLengthTest(String name) {
-        super(name);
+    public SurrogatePairLengthTest() {
     }
     
     // Can only test when the property is set

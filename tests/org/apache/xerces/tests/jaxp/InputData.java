@@ -29,7 +29,7 @@ import org.xml.sax.InputSource;
  * @author Edwin Goei
  */
 public class InputData extends InputSource {
-    static String dataPrefix = "tests/jaxp/data/";
+    static String dataPrefix = "tests/org/apache/xerces/tests/jaxp/data/";
     private String uri;
 
     /**
@@ -42,6 +42,6 @@ public class InputData extends InputSource {
     }
 
     public String toURIString() throws Exception {
-        return new File(uri).toURL().toString();
+        return new File(uri).toURI().toString();
     }
 }

@@ -18,6 +18,9 @@
 package org.apache.xerces.tests.schema.config;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.apache.xerces.dom.PSVIElementNSImpl;
@@ -47,14 +50,15 @@ public class IdIdrefCheckingTest extends BaseTest {
         return new String[] { DUPLICATE_ID, NO_ID_BINDING };
     }
     
-    public IdIdrefCheckingTest(String name) {
-        super(name);
+    public IdIdrefCheckingTest() {
     }
-    
+
+    @BeforeEach
     protected void setUp() throws Exception {
         super.setUp();
     }
     
+    @AfterEach
     protected void tearDown() throws Exception {
         super.tearDown();
     }

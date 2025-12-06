@@ -31,7 +31,24 @@ module xercesImpl {
     provides javax.xml.stream.XMLEventFactory with org.apache.xerces.stax.XMLEventFactoryImpl;
     
     provides org.xml.sax.XMLReader with org.apache.xerces.parsers.SAXParser;
-    
 
+    
+    exports org.apache.xerces.tests.dom.range to org.junit.platform.commons;
+    exports org.apache.xerces.tests.dom.traversal to org.junit.platform.commons;
+    exports org.apache.xerces.tests.dv to org.junit.platform.commons;
+    exports org.apache.xerces.tests.idc to org.junit.platform.commons;
+    exports org.apache.xerces.tests.jaxp to org.junit.platform.commons;
+    exports org.apache.xerces.tests.schema.config to org.junit.platform.commons;
+    exports org.apache.xerces.tests.schema.annotations to org.junit.platform.commons;
+    exports org.apache.xerces.tests.util to org.junit.platform.commons;
+
+    opens org.apache.xerces.tests.dom.range to org.junit.platform.commons;
+    opens org.apache.xerces.tests.dom.traversal to org.junit.platform.commons;
+    opens org.apache.xerces.tests.dv to org.junit.platform.commons;
+    opens org.apache.xerces.tests.idc to org.junit.platform.commons;
+    opens org.apache.xerces.tests.jaxp to org.junit.platform.commons;
+    opens org.apache.xerces.tests.schema.config to org.junit.platform.commons;
+    opens org.apache.xerces.tests.schema.annotations to org.junit.platform.commons;
+    opens org.apache.xerces.tests.util to org.junit.platform.commons;
 
 }

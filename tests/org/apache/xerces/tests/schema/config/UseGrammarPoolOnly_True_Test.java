@@ -40,8 +40,7 @@ public class UseGrammarPoolOnly_True_Test extends BaseTest {
         return true;
     }
     
-    public UseGrammarPoolOnly_True_Test(String name) {
-        super(name);
+    public UseGrammarPoolOnly_True_Test() {
     }
     
     /**

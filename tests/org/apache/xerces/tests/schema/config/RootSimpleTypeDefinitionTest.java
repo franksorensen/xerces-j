@@ -50,8 +50,7 @@ public class RootSimpleTypeDefinitionTest extends BaseTest {
         return new String[] { INVALID_TYPE_ERROR, MININCLUSIVE_DERIVATION_ERROR };
     }
     
-    public RootSimpleTypeDefinitionTest(String name) {
-        super(name);
+    public RootSimpleTypeDefinitionTest() {
         // This is a roundabout way of making sure that we're not using an
         // interned string (so that == doesn't work)
         String ns = "x" + XMLConstants.W3C_XML_SCHEMA_NS_URI;
