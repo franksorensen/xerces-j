@@ -14,6 +14,7 @@ module xercesImpl {
     exports org.apache.xerces.impl.dv;
     exports org.apache.xerces.impl.dv.util;
     exports org.apache.xerces.impl.validation;
+    exports org.apache.xerces.util;
 
     uses javax.xml.parsers.DocumentBuilderFactory;
     uses javax.xml.parsers.SAXParserFactory;
